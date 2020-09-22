@@ -64,7 +64,7 @@ async function seed() {
     category: 'Necklace'
   })
   products.push(necklace1)
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 25; i++) {
     const necklace = await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
@@ -86,7 +86,7 @@ async function seed() {
     category: 'Necklace'
   })
   products.push(bracelet1)
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 25; i++) {
     const bracelet = await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
@@ -109,7 +109,7 @@ async function seed() {
     category: 'Ring'
   })
   products.push(ring1)
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 25; i++) {
     const ring = await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
@@ -132,7 +132,7 @@ async function seed() {
     category: 'Earring'
   })
   products.push(earring1)
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 25; i++) {
     const earring = await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),

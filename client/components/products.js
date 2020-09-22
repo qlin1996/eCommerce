@@ -7,8 +7,22 @@ import {Link} from 'react-router-dom'
  * COMPONENT
  */
 class Products extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      currentPageNum: 1,
+      productsPerPage: 15
+    }
+  }
   async componentDidMount() {
     await this.props.fetchProductsThunk()
+  }
+
+  paginate = pageNum => {
+    this.setState(prevState => ({
+      currentPageNum: pageNum,
+      productsPerPage: prevState.productsPerPage
+    }))
   }
 
   capitalizeFirstLetter = str => {
@@ -20,23 +34,70 @@ class Products extends React.Component {
   }
 
   render() {
-    const products = this.props.products || []
+    // products per page
+    const indexOfLastProduct =
+      this.state.currentPageNum * this.state.productsPerPage
+    const indexOfFirstProduct = indexOfLastProduct - this.state.productsPerPage
+    const currentProductsOnPage = this.props.products.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+    )
+
+    // all page numbers
+    const allPageNumbers = []
+    for (
+      let i = 1;
+      i <= Math.ceil(this.props.products.length / this.state.productsPerPage);
+      i++
+    ) {
+      allPageNumbers.push(i)
+    }
+
     return (
-      <section className="all-products-grid">
-        {products.map(product => (
-          <div key={product.id}>
-            <Link to={`/products/${product.id}`}>
-              <div className="all-products-card">
-                <img src={product.imageUrl} className="all-products-img" />
-                <h2 className="text-align-center">
-                  {this.capitalizeFirstLetter(product.name)}
-                </h2>
-                <p className="text-align-center">$ {product.price}</p>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </section>
+      <div>
+        <section className="all-products-grid">
+          {currentProductsOnPage.map(product => (
+            <div key={product.id}>
+              <Link to={`/products/${product.id}`}>
+                <div className="all-products-card">
+                  <img src={product.imageUrl} className="all-products-img" />
+                  <h2 className="text-align-center">
+                    {this.capitalizeFirstLetter(product.name)}
+                  </h2>
+                  <p className="text-align-center">$ {product.price}</p>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </section>
+        <div className="pagination">
+          {allPageNumbers.map(number => {
+            if (number === this.state.currentPageNum) {
+              return (
+                <button
+                  type="button"
+                  className="pagination-button-black"
+                  key={number}
+                  onClick={() => this.paginate(number)}
+                >
+                  {number}
+                </button>
+              )
+            } else {
+              return (
+                <button
+                  type="button"
+                  className="pagination-button-grey"
+                  key={number}
+                  onClick={() => this.paginate(number)}
+                >
+                  {number}
+                </button>
+              )
+            }
+          })}
+        </div>
+      </div>
     )
   }
 }
