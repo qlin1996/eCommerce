@@ -22,12 +22,12 @@ class Products extends React.Component {
   render() {
     const products = this.props.products || []
     return (
-      <section className="grid">
+      <section className="all-products-grid">
         {products.map(product => (
           <div key={product.id}>
             <Link to={`/products/${product.id}`}>
-              <div className="card">
-                <img src={product.imageUrl} />
+              <div className="all-products-card">
+                <img src={product.imageUrl} className="all-products-img" />
                 <h2 className="text-align-center">
                   {this.capitalizeFirstLetter(product.name)}
                 </h2>

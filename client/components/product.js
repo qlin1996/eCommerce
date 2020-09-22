@@ -13,12 +13,15 @@ class Product extends React.Component {
   render() {
     const product = this.props.product || {}
     return (
-      <div>
-        <h1>SINGLE PRODUCT</h1>
-        <img src={product.imageUrl} />
-        <h2>{product.name}</h2>
-        <p>{product.description}</p>
-        <p>$ {product.price}</p>
+      <div className="single-product-grid">
+        <div className="single-product-card">
+          <img src={product.imageUrl} className="single-product-img " />
+        </div>
+        <div className="single-product-card">
+          <h2 className="text-align-center">{product.name}</h2>
+          <p className="text-align-center">{product.description}</p>
+          <p className="text-align-center">$ {product.price}</p>
+        </div>
       </div>
     )
   }
