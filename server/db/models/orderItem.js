@@ -15,9 +15,6 @@ const OrderItem = db.define('orderItem', {
     validate: {
       isNumeric: true,
       min: 1
-    },
-    get() {
-      return this.getDataValue('price') / 100
     }
   }
 })
