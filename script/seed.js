@@ -83,7 +83,7 @@ async function seed() {
     imageUrl:
       'https://www.vancleefarpels.com/content/dam/rcq/vca/18/38/98/0/1838980.png.adapt.1070.1070.png',
     quantityInStock: 10,
-    category: 'Necklace'
+    category: 'Bracelet'
   })
   products.push(bracelet1)
   for (let i = 0; i < 25; i++) {

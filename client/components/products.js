@@ -11,11 +11,18 @@ class Products extends React.Component {
     super()
     this.state = {
       currentPageNum: 1,
-      productsPerPage: 15
+      productsPerPage: 15,
+      category: 'All'
     }
   }
   async componentDidMount() {
     await this.props.fetchProductsThunk()
+  }
+
+  handleSelectChange = event => {
+    this.setState({
+      category: event.target.value
+    })
   }
 
   paginate = pageNum => {
@@ -34,11 +41,15 @@ class Products extends React.Component {
   }
 
   render() {
+    const productsSelected = this.props.products.filter(
+      product => product.category === this.state.category
+    )
+
     // products per page
     const indexOfLastProduct =
       this.state.currentPageNum * this.state.productsPerPage
     const indexOfFirstProduct = indexOfLastProduct - this.state.productsPerPage
-    const currentProductsOnPage = this.props.products.slice(
+    const currentProductsOnPage = productsSelected.slice(
       indexOfFirstProduct,
       indexOfLastProduct
     )
@@ -47,7 +58,7 @@ class Products extends React.Component {
     const allPageNumbers = []
     for (
       let i = 1;
-      i <= Math.ceil(this.props.products.length / this.state.productsPerPage);
+      i <= Math.ceil(productsSelected.length / this.state.productsPerPage);
       i++
     ) {
       allPageNumbers.push(i)
@@ -55,6 +66,15 @@ class Products extends React.Component {
 
     return (
       <div>
+        <div>
+          <select onChange={this.handleSelectChange}>
+            <option value="All">All</option>
+            <option value="Necklace">Necklace</option>
+            <option value="Bracelet">Bracelet</option>
+            <option value="Ring">Ring</option>
+            <option value="Earring">Earring</option>
+          </select>
+        </div>
         <section className="all-products-grid">
           {currentProductsOnPage.map(product => (
             <div key={product.id}>
