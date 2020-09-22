@@ -4,10 +4,17 @@ body {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 label {
   display: block;
+}
+
+img {
+  height: 200px;
+  width: 200px;
+  margin: auto;
 }
 
 nav a {
@@ -18,4 +25,23 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.grid {
+  display: grid;
+  padding: 4rem 2rem;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  justify-content: center;
+  background-color: #fafafa;
+}
+
+.text-align-center {
+  text-align: center;
 }

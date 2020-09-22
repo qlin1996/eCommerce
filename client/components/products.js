@@ -11,21 +11,32 @@ class Products extends React.Component {
     await this.props.fetchProductsThunk()
   }
 
+  capitalizeFirstLetter = str => {
+    let arr = str.toLowerCase().split(' ')
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1)
+    }
+    return arr.join(' ')
+  }
+
   render() {
     const products = this.props.products || []
     return (
-      <div>
-        <h1>ALL PRODUCTS</h1>
+      <section className="grid">
         {products.map(product => (
           <div key={product.id}>
             <Link to={`/products/${product.id}`}>
-              <img src={product.imageUrl} />
-              <h2>{product.name}</h2>
-              <p>{product.price}</p>
+              <div className="card">
+                <img src={product.imageUrl} />
+                <h2 className="text-align-center">
+                  {this.capitalizeFirstLetter(product.name)}
+                </h2>
+                <p className="text-align-center">$ {product.price}</p>
+              </div>
             </Link>
           </div>
         ))}
-      </div>
+      </section>
     )
   }
 }

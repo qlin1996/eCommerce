@@ -55,12 +55,11 @@ async function seed() {
   // products
   const products = []
   const necklace1 = await Product.create({
-    name: 'Two Butterfly pendant',
-    description:
-      'Two Butterfly pendant, rose gold, white mother-of-pearl, round diamond, white gold, marquise diamond, diamond quality DEF, IF to VVS.',
+    name: 'Trace Chain',
+    description: 'Angle filed trace chain, white gold, 40 wire, 42 cm.',
     price: 78.99,
     imageUrl:
-      'https://www.vancleefarpels.com/content/dam/rcq/vca/16/27/73/6/1627736.png.adapt.1070.1070.png',
+      'https://www.vancleefarpels.com/content/dam/rcq/vca/16/27/10/8/1627108.png.adapt.1070.1070.png',
     quantityInStock: 10,
     category: 'Necklace'
   })
@@ -78,8 +77,8 @@ async function seed() {
     products.push(necklace.dataValues)
   }
   const bracelet1 = await Product.create({
-    name: 'Perlée signature bracelet',
-    description: 'Perlée signature bracelet, yellow gold, medium model',
+    name: 'Perlée bracelet',
+    description: 'Perlée bracelet, yellow gold, medium model',
     price: 56.08,
     imageUrl:
       'https://www.vancleefarpels.com/content/dam/rcq/vca/18/38/98/0/1838980.png.adapt.1070.1070.png',
@@ -100,9 +99,9 @@ async function seed() {
     products.push(bracelet.dataValues)
   }
   const ring1 = await Product.create({
-    name: 'Félicité wedding band',
+    name: 'Félicité ring',
     description:
-      'Félicité wedding band, yellow gold, round diamonds; diamond quality DEF, IF to VVS.',
+      'Félicité ring, yellow gold, round diamonds; diamond quality DEF, IF to VVS.',
     price: 99.74,
     imageUrl:
       'https://www.vancleefarpels.com/content/dam/rcq/vca/16/27/76/1/1627761.png.adapt.1070.1070.png',
@@ -123,9 +122,9 @@ async function seed() {
     products.push(ring.dataValues)
   }
   const earring1 = await Product.create({
-    name: 'Rose de Noël earrings',
+    name: 'Rose earrings',
     description:
-      'Rose de Noël earrings, small model, yellow gold, white mother-of-pearl, round diamonds; diamond quality DEF, IF to VVS.',
+      'Rose earrings, small model, yellow gold, white mother-of-pearl, round diamonds; diamond quality DEF, IF to VVS.',
     price: 23.74,
     imageUrl:
       'https://www.vancleefarpels.com/content/dam/rcq/vca/16/26/57/1/1626571.png.adapt.1070.1070.png',
