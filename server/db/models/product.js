@@ -25,6 +25,9 @@ const Product = db.define('product', {
     },
     get() {
       return this.getDataValue('price') / 100
+    },
+    set(valueToBeSet) {
+      this.setDataValue('price', valueToBeSet * 100)
     }
   },
   imageUrl: {
