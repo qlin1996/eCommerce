@@ -10,7 +10,7 @@ const OrderItem = db.define('orderItem', {
     }
   },
   orderItemPrice: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     defaultValue: 100,
     validate: {
       isNumeric: true,

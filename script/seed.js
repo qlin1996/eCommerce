@@ -58,7 +58,7 @@ async function seed() {
     name: 'Two Butterfly pendant',
     description:
       'Two Butterfly pendant, rose gold, white mother-of-pearl, round diamond, white gold, marquise diamond, diamond quality DEF, IF to VVS.',
-    price: 7899,
+    price: 78.99,
     imageUrl:
       'https://www.vancleefarpels.com/content/dam/rcq/vca/16/27/73/6/1627736.png.adapt.1070.1070.png',
     quantityInStock: 10,
@@ -69,7 +69,7 @@ async function seed() {
     const necklace = await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
-      price: faker.commerce.price() * 10,
+      price: faker.finance.amount(50, 200, 2),
       imageUrl:
         'https://www.vancleefarpels.com/content/dam/rcq/vca/16/27/11/5/1627115.png.adapt.1070.1070.png',
       quantityInStock: 10,
@@ -80,7 +80,7 @@ async function seed() {
   const bracelet1 = await Product.create({
     name: 'Perlée signature bracelet',
     description: 'Perlée signature bracelet, yellow gold, medium model',
-    price: 5608,
+    price: 56.08,
     imageUrl:
       'https://www.vancleefarpels.com/content/dam/rcq/vca/18/38/98/0/1838980.png.adapt.1070.1070.png',
     quantityInStock: 10,
@@ -91,7 +91,7 @@ async function seed() {
     const bracelet = await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
-      price: faker.commerce.price() * 10,
+      price: faker.finance.amount(50, 200, 2),
       imageUrl:
         'https://www.vancleefarpels.com/content/dam/rcq/vca/17/59/45/0/1759450.png.adapt.1070.1070.png',
       quantityInStock: 10,
@@ -103,7 +103,7 @@ async function seed() {
     name: 'Félicité wedding band',
     description:
       'Félicité wedding band, yellow gold, round diamonds; diamond quality DEF, IF to VVS.',
-    price: 9974,
+    price: 99.74,
     imageUrl:
       'https://www.vancleefarpels.com/content/dam/rcq/vca/16/27/76/1/1627761.png.adapt.1070.1070.png',
     quantityInStock: 10,
@@ -114,7 +114,7 @@ async function seed() {
     const ring = await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
-      price: faker.commerce.price() * 10,
+      price: faker.finance.amount(50, 200, 2),
       imageUrl:
         'https://www.vancleefarpels.com/content/dam/rcq/vca/16/26/91/4/1626914.png.adapt.1070.1070.png',
       quantityInStock: 10,
@@ -126,7 +126,7 @@ async function seed() {
     name: 'Rose de Noël earrings',
     description:
       'Rose de Noël earrings, small model, yellow gold, white mother-of-pearl, round diamonds; diamond quality DEF, IF to VVS.',
-    price: 2374,
+    price: 23.74,
     imageUrl:
       'https://www.vancleefarpels.com/content/dam/rcq/vca/16/26/57/1/1626571.png.adapt.1070.1070.png',
     quantityInStock: 10,
@@ -137,7 +137,7 @@ async function seed() {
     const earring = await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
-      price: faker.commerce.price() * 10,
+      price: faker.finance.amount(50, 200, 2),
       imageUrl:
         'https://www.vancleefarpels.com/content/dam/rcq/vca/16/27/98/5/1627985.png.adapt.1070.1070.png',
       quantityInStock: 10,
@@ -150,7 +150,7 @@ async function seed() {
   await Promise.all([
     Order.create({
       userId: 2,
-      totalOrderPrice: 11216,
+      totalOrderPrice: 112.16,
       dateSubmitted: new Date(),
       shippingAddressId: 1
     })
@@ -160,7 +160,7 @@ async function seed() {
   await Promise.all([
     OrderItem.create({
       orderItemQuantity: 2,
-      orderItemPrice: 5608,
+      orderItemPrice: 56.08,
       productId: 12,
       orderId: 1
     })
