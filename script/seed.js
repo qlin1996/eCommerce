@@ -2,7 +2,14 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product, Order, OrderItem} = require('../server/db/models')
+const {
+  User,
+  Product,
+  Order,
+  OrderItem,
+  BillingAddress,
+  ShippingAddress
+} = require('../server/db/models')
 const faker = require('faker')
 
 const orders = [
@@ -37,6 +44,22 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
+  // billing and shipping Addresses
+  await Promise.all([
+    BillingAddress.create({
+      billingStreetAddress: '3847 Prince Street',
+      billingCity: 'New York',
+      billingState: 'New York',
+      billingZipCode: 11327
+    }),
+    ShippingAddress.create({
+      shippingStreetAddress: '3847 Prince Street',
+      shippingCity: 'New York',
+      shippingState: 'New York',
+      shippingZipCode: 11327
+    })
+  ])
+
   // users
   const users = []
   const admin = await User.create({
@@ -44,15 +67,7 @@ async function seed() {
     lastName: 'Admin',
     email: 'admin@gmail.com',
     password: 'admin',
-    isAdmin: 'yes',
-    billingStreetAddress: '3847 Prince Street',
-    billingCity: 'New York',
-    billingState: 'New York',
-    billingZipCode: 11327,
-    shippingStreetAddress: '3847 Prince Street',
-    shippingCity: 'New York',
-    shippingState: 'New York',
-    shippingZipCode: 11327
+    isAdmin: 'yes'
   })
   users.push(admin)
   const user = await User.create({
@@ -61,14 +76,8 @@ async function seed() {
     email: 'user@gmail.com',
     password: 'user',
     isAdmin: 'no',
-    billingStreetAddress: '3847 Prince Street',
-    billingCity: 'New York',
-    billingState: 'New York',
-    billingZipCode: 11327,
-    shippingStreetAddress: '3847 Prince Street',
-    shippingCity: 'New York',
-    shippingState: 'New York',
-    shippingZipCode: 11327
+    billingAddressId: 1,
+    shippingAddressId: 1
   })
   users.push(user)
 
@@ -180,7 +189,6 @@ async function seed() {
     })
   )
 
-  console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }
 

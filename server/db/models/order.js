@@ -2,13 +2,9 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-  isSubmitted: {
-    type: Sequelize.ENUM('yes', 'no'),
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    },
-    defaultValue: 'no'
+  status: {
+    type: Sequelize.ENUM('CREATED', 'PROCESSING', 'CANCELLED', 'COMPLETED'),
+    defaultValue: 'CREATED'
   },
   totalOrderPrice: {
     type: Sequelize.INTEGER,
