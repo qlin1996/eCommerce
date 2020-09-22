@@ -12,34 +12,6 @@ const {
 } = require('../server/db/models')
 const faker = require('faker')
 
-const orders = [
-  {
-    userId: 1,
-    totalOrderPrice: 7899,
-    dateSubmitted: new Date()
-  },
-  {
-    userId: 2,
-    totalOrderPrice: 11216,
-    dateSubmitted: new Date()
-  }
-]
-
-const orderitems = [
-  {
-    orderItemQuantity: 1,
-    orderItemPrice: 7899,
-    productId: 1,
-    orderId: 1
-  },
-  {
-    orderItemQuantity: 2,
-    orderItemPrice: 5608,
-    productId: 12,
-    orderId: 2
-  }
-]
-
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
@@ -76,8 +48,7 @@ async function seed() {
     email: 'user@gmail.com',
     password: 'user',
     isAdmin: 'no',
-    billingAddressId: 1,
-    shippingAddressId: 1
+    billingAddressId: 1
   })
   users.push(user)
 
@@ -176,18 +147,24 @@ async function seed() {
   }
 
   // order
-  await Promise.all(
-    orders.map(order => {
-      return Order.create(order)
+  await Promise.all([
+    Order.create({
+      userId: 2,
+      totalOrderPrice: 11216,
+      dateSubmitted: new Date(),
+      shippingAddressId: 1
     })
-  )
+  ])
 
   // orderItems
-  await Promise.all(
-    orderitems.map(item => {
-      return OrderItem.create(item)
+  await Promise.all([
+    OrderItem.create({
+      orderItemQuantity: 2,
+      orderItemPrice: 5608,
+      productId: 12,
+      orderId: 1
     })
-  )
+  ])
 
   console.log(`seeded successfully`)
 }

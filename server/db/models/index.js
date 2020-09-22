@@ -7,7 +7,8 @@ const OrderItem = require('./orderItem')
 
 User.hasMany(Order)
 BillingAddress.hasOne(User)
-ShippingAddress.hasOne(User)
+ShippingAddress.hasOne(Order)
+
 Product.belongsToMany(Order, {through: OrderItem})
 Order.belongsToMany(Product, {through: OrderItem})
 
