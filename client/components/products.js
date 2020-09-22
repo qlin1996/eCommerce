@@ -41,9 +41,14 @@ class Products extends React.Component {
   }
 
   render() {
-    const productsSelected = this.props.products.filter(
-      product => product.category === this.state.category
-    )
+    let productsSelected =
+      this.props.products.filter(
+        product => product.category === this.state.category
+      ) || []
+
+    if (this.state.category === 'All') {
+      productsSelected = this.props.products || []
+    }
 
     // products per page
     const indexOfLastProduct =
