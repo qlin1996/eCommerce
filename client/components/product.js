@@ -10,6 +10,14 @@ class Product extends React.Component {
     await this.props.fetchProductThunk(this.props.match.params.productId)
   }
 
+  capitalizeFirstLetter = str => {
+    let arr = str.toLowerCase().split(' ')
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1)
+    }
+    return arr.join(' ')
+  }
+
   render() {
     const product = this.props.product || {}
     return (
@@ -18,9 +26,13 @@ class Product extends React.Component {
           <img src={product.imageUrl} className="single-product-img " />
         </div>
         <div className="single-product-card">
-          <h2 className="text-align-center">{product.name}</h2>
+          <h2 className="text-align-center">
+            {product.name && this.capitalizeFirstLetter(product.name)}
+          </h2>
           <p className="text-align-center">{product.description}</p>
-          <p className="text-align-center">$ {product.price.toFixed(2)}</p>
+          <p className="text-align-center">
+            $ {product.price && product.price.toFixed(2)}
+          </p>
         </div>
       </div>
     )
