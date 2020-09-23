@@ -20,7 +20,7 @@ class Product extends React.Component {
         <div className="single-product-card">
           <h2 className="text-align-center">{product.name}</h2>
           <p className="text-align-center">{product.description}</p>
-          <p className="text-align-center">$ {product.price}</p>
+          <p className="text-align-center">$ {product.price.toFixed(2)}</p>
         </div>
       </div>
     )

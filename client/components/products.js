@@ -160,7 +160,9 @@ class Products extends React.Component {
                   <h2 className="text-align-center">
                     {this.capitalizeFirstLetter(product.name)}
                   </h2>
-                  <p className="text-align-center">$ {product.price}</p>
+                  <p className="text-align-center">
+                    $ {product.price.toFixed(2)}
+                  </p>
                 </div>
               </Link>
             </div>
