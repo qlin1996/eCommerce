@@ -12,17 +12,36 @@ class Products extends React.Component {
     this.state = {
       currentPageNum: 1,
       productsPerPage: 15,
-      category: 'All'
+      productsSelected: [],
+      category: 'All',
+      sort: 'New Arrival'
     }
   }
   async componentDidMount() {
     await this.props.fetchProductsThunk()
+    this.setState({productsSelected: this.props.products})
   }
 
   handleSelectChange = event => {
-    this.setState({
-      category: event.target.value
-    })
+    let productsSelectedWithFilter
+    this.setState(
+      {
+        [event.target.name]: event.target.value
+      },
+      () => {
+        if (this.state.category === 'All') {
+          productsSelectedWithFilter = this.props.products
+        } else {
+          productsSelectedWithFilter = this.props.products.filter(
+            product => product.category === this.state.category
+          )
+          this.setState({
+            productsSelected: productsSelectedWithFilter
+          })
+        }
+        console.log('this.state', this.state)
+      }
+    )
   }
 
   paginate = pageNum => {
@@ -41,20 +60,11 @@ class Products extends React.Component {
   }
 
   render() {
-    let productsSelected =
-      this.props.products.filter(
-        product => product.category === this.state.category
-      ) || []
-
-    if (this.state.category === 'All') {
-      productsSelected = this.props.products || []
-    }
-
     // products per page
     const indexOfLastProduct =
       this.state.currentPageNum * this.state.productsPerPage
     const indexOfFirstProduct = indexOfLastProduct - this.state.productsPerPage
-    const currentProductsOnPage = productsSelected.slice(
+    const currentProductsOnPage = this.state.productsSelected.slice(
       indexOfFirstProduct,
       indexOfLastProduct
     )
@@ -63,7 +73,10 @@ class Products extends React.Component {
     const allPageNumbers = []
     for (
       let i = 1;
-      i <= Math.ceil(productsSelected.length / this.state.productsPerPage);
+      i <=
+      Math.ceil(
+        this.state.productsSelected.length / this.state.productsPerPage
+      );
       i++
     ) {
       allPageNumbers.push(i)
@@ -71,13 +84,27 @@ class Products extends React.Component {
 
     return (
       <div>
-        <div>
-          <select onChange={this.handleSelectChange}>
+        <div className="filter-sort">
+          <label>Category</label>
+          <select
+            name="category"
+            onChange={event => this.handleSelectChange(event)}
+          >
             <option value="All">All</option>
             <option value="Necklace">Necklace</option>
             <option value="Bracelet">Bracelet</option>
             <option value="Ring">Ring</option>
             <option value="Earring">Earring</option>
+          </select>
+
+          <label>Sort</label>
+          <select
+            name="sort"
+            onChange={event => this.handleSelectChange(event)}
+          >
+            <option value="New Arrival">New Arrival</option>
+            <option value="Price: Low to High">Price: Low to High</option>
+            <option value="Price: High to Low">Price: High to Low</option>
           </select>
         </div>
         <section className="all-products-grid">
