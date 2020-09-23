@@ -22,7 +22,7 @@ class Products extends React.Component {
     this.setState({productsSelected: this.props.products})
   }
 
-  handleSelectChange = event => {
+  handleFilter = event => {
     let productsSelectedWithFilter
     this.setState(
       {
@@ -39,9 +39,38 @@ class Products extends React.Component {
             productsSelected: productsSelectedWithFilter
           })
         }
-        console.log('this.state', this.state)
       }
     )
+  }
+
+  handleSort = event => {
+    let sortedProducts
+    if (event.target.value === 'New Arrival') {
+      sortedProducts = this.state.productsSelected.sort(
+        (a, b) =>
+          a.createdAt > b.createdAt ? 1 : b.createdAt > a.createdAt ? -1 : 0
+      )
+      console.log('New Arrival SORTED', sortedProducts)
+      this.setState({
+        productsSelected: sortedProducts
+      })
+    } else if (event.target.value === 'Price: Low to High') {
+      sortedProducts = this.state.productsSelected.sort(
+        (a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0)
+      )
+      console.log('Price: Low->High SORTED', sortedProducts)
+      this.setState({
+        productsSelected: sortedProducts
+      })
+    } else {
+      sortedProducts = this.state.productsSelected.sort(
+        (a, b) => (a.price < b.price ? 1 : b.price < a.price ? -1 : 0)
+      )
+      console.log('Price: High->Low SORTED', sortedProducts)
+      this.setState({
+        productsSelected: sortedProducts
+      })
+    }
   }
 
   paginate = pageNum => {
@@ -86,10 +115,7 @@ class Products extends React.Component {
       <div>
         <div className="filter-sort">
           <label>Category</label>
-          <select
-            name="category"
-            onChange={event => this.handleSelectChange(event)}
-          >
+          <select name="category" onChange={event => this.handleFilter(event)}>
             <option value="All">All</option>
             <option value="Necklace">Necklace</option>
             <option value="Bracelet">Bracelet</option>
@@ -98,10 +124,7 @@ class Products extends React.Component {
           </select>
 
           <label>Sort</label>
-          <select
-            name="sort"
-            onChange={event => this.handleSelectChange(event)}
-          >
+          <select name="sort" onChange={event => this.handleSort(event)}>
             <option value="New Arrival">New Arrival</option>
             <option value="Price: Low to High">Price: Low to High</option>
             <option value="Price: High to Low">Price: High to Low</option>
