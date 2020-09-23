@@ -24,19 +24,40 @@ class Products extends React.Component {
 
   handleFilter = event => {
     let productsSelectedWithFilter
+    let sort = arr => {
+      if (this.state.sort === 'New Arrival') {
+        return arr.sort(
+          (a, b) =>
+            a.createdAt > b.createdAt ? 1 : b.createdAt > a.createdAt ? -1 : 0
+        )
+      } else if (this.state.sort === 'Price: Low to High') {
+        return arr.sort(
+          (a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0)
+        )
+      } else {
+        return arr.sort(
+          (a, b) => (a.price < b.price ? 1 : b.price < a.price ? -1 : 0)
+        )
+      }
+    }
+
     this.setState(
       {
         [event.target.name]: event.target.value
       },
       () => {
         if (this.state.category === 'All') {
-          productsSelectedWithFilter = this.props.products
+          productsSelectedWithFilter = sort(this.props.products)
+          this.setState({
+            productsSelected: productsSelectedWithFilter
+          })
         } else {
           productsSelectedWithFilter = this.props.products.filter(
             product => product.category === this.state.category
           )
+          let productsSelectedAfterSort = sort(productsSelectedWithFilter)
           this.setState({
-            productsSelected: productsSelectedWithFilter
+            productsSelected: productsSelectedAfterSort
           })
         }
       }
@@ -50,25 +71,25 @@ class Products extends React.Component {
         (a, b) =>
           a.createdAt > b.createdAt ? 1 : b.createdAt > a.createdAt ? -1 : 0
       )
-      console.log('New Arrival SORTED', sortedProducts)
       this.setState({
-        productsSelected: sortedProducts
+        productsSelected: sortedProducts,
+        [event.target.name]: event.target.value
       })
     } else if (event.target.value === 'Price: Low to High') {
       sortedProducts = this.state.productsSelected.sort(
         (a, b) => (a.price > b.price ? 1 : b.price > a.price ? -1 : 0)
       )
-      console.log('Price: Low->High SORTED', sortedProducts)
       this.setState({
-        productsSelected: sortedProducts
+        productsSelected: sortedProducts,
+        [event.target.name]: event.target.value
       })
     } else {
       sortedProducts = this.state.productsSelected.sort(
         (a, b) => (a.price < b.price ? 1 : b.price < a.price ? -1 : 0)
       )
-      console.log('Price: High->Low SORTED', sortedProducts)
       this.setState({
-        productsSelected: sortedProducts
+        productsSelected: sortedProducts,
+        [event.target.name]: event.target.value
       })
     }
   }
