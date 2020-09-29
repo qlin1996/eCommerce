@@ -99,6 +99,7 @@ class Products extends React.Component {
       currentPageNum: pageNum,
       productsPerPage: prevState.productsPerPage
     }))
+    window.scrollTo(0, 0)
   }
 
   capitalizeFirstLetter = str => {

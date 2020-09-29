@@ -6,14 +6,14 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => {
   const [navClicked, setNavClicked] = useState(false)
-  console.log(navClicked)
+
   return (
     <header>
       <div>
         <i className="fas fa-bars" onClick={() => setNavClicked(true)} />
         <h1>Star Jewelry</h1>
       </div>
-      <nav className={navClicked && 'nav-clicked'}>
+      <nav className={navClicked ? 'nav-clicked' : null}>
         <i className="fas fa-times" onClick={() => setNavClicked(false)} />
         {isLoggedIn ? (
           <React.Fragment>

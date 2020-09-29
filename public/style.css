@@ -71,13 +71,16 @@ select {
   .fa-bars {
     display: block;
   }
+
   .fa-times {
     display: block;
   }
+
   nav,
   hr {
     display: none;
   }
+
   .nav-clicked {
     display: flex;
     flex-direction: column;
@@ -90,6 +93,7 @@ select {
     padding-top: 4em;
     padding-left: 2em;
   }
+
   #app .filter-sort {
     justify-content: center;
   }
