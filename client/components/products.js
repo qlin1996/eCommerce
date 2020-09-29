@@ -135,21 +135,28 @@ class Products extends React.Component {
     return (
       <div>
         <div className="filter-sort">
-          <label>Category</label>
-          <select name="category" onChange={event => this.handleFilter(event)}>
-            <option value="All">All</option>
-            <option value="Necklace">Necklace</option>
-            <option value="Bracelet">Bracelet</option>
-            <option value="Ring">Ring</option>
-            <option value="Earring">Earring</option>
-          </select>
+          <div className="filter-sort-item">
+            <label>Category</label>
+            <select
+              name="category"
+              onChange={event => this.handleFilter(event)}
+            >
+              <option value="All">All</option>
+              <option value="Necklace">Necklace</option>
+              <option value="Bracelet">Bracelet</option>
+              <option value="Ring">Ring</option>
+              <option value="Earring">Earring</option>
+            </select>
+          </div>
 
-          <label>Sort</label>
-          <select name="sort" onChange={event => this.handleSort(event)}>
-            <option value="New Arrival">New Arrival</option>
-            <option value="Price: Low to High">Price: Low to High</option>
-            <option value="Price: High to Low">Price: High to Low</option>
-          </select>
+          <div className="filter-sort-item">
+            <label>Sort</label>
+            <select name="sort" onChange={event => this.handleSort(event)}>
+              <option value="New Arrival">New Arrival</option>
+              <option value="Price: Low to High">Price: Low to High</option>
+              <option value="Price: High to Low">Price: High to Low</option>
+            </select>
+          </div>
         </div>
         <section className="all-products-grid">
           {currentProductsOnPage.map(product => (
