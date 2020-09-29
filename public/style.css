@@ -51,7 +51,7 @@ select {
 }
 
 /* NAV BAR */
-.fas {
+.fa-bars {
   position: absolute;
   top: 1.5em;
   left: 1.5em;
@@ -59,33 +59,46 @@ select {
   display: none;
 }
 
+.fa-times {
+  position: absolute;
+  top: 1.5em;
+  right: 2.5em;
+  font-size: 1.5em;
+  display: none;
+}
+
 @media screen and (max-width: 480px) {
-  .fas {
+  .fa-bars {
+    display: block;
+  }
+  .fa-times {
     display: block;
   }
   nav,
   hr {
     display: none;
   }
+  .nav-clicked {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    background-color: white;
+    width: 70%;
+    margin-left: 0;
+    height: 100vh;
+    padding-top: 4em;
+    padding-left: 2em;
+  }
   #app .filter-sort {
     justify-content: center;
-    position: sticky;
-    top: 5em;
   }
 }
 
 /* ALL PRODUCTS */
 .filter-sort {
   display: flex;
-  padding: 0 1em 1em 1em;
-  position: sticky;
-  top: 8em;
-  background-color: white;
-}
-
-.filter-sort-item {
-  display: flex;
-  margin: 1em;
+  padding: 0.5em 1em 1em 1em;
 }
 
 .all-products-grid {
