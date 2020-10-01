@@ -151,7 +151,7 @@ class Products extends React.Component {
           </div>
 
           <div className="filter-sort">
-            <label>Sort</label>
+            <label>Sort By</label>
             <select name="sort" onChange={event => this.handleSort(event)}>
               <option value="New Arrival">New Arrival</option>
               <option value="Price: Low to High">Price: Low to High</option>

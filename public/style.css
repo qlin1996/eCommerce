@@ -33,11 +33,6 @@ nav a {
   margin: 0.5em 1em;
 }
 
-form div {
-  margin: 1em;
-  display: inline-block;
-}
-
 select {
   margin-left: 0.5em;
 }
@@ -152,7 +147,7 @@ select {
   display: grid;
   padding: 4rem 2rem;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 3fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 3fr));
 }
 
 .single-product-card {
@@ -167,4 +162,36 @@ select {
   height: 360px;
   width: 360px;
   margin: auto;
+}
+
+/* LOGIN LOGOUT */
+.auth-grid {
+  display: grid;
+  padding: 4rem 2rem;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 3fr));
+}
+
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  justify-content: center;
+}
+
+.auth-img {
+  display: flex;
+  justify-content: center;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
 }
