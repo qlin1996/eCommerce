@@ -49,7 +49,9 @@ const Navbar = ({handleClick, isLoggedIn}) => {
           </React.Fragment>
         )}
       </nav>
-      <hr />
+      <div className="hr">
+        <hr />
+      </div>
     </header>
   )
 }

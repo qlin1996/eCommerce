@@ -71,8 +71,11 @@ select {
     display: block;
   }
 
-  nav,
-  hr {
+  .hr {
+    margin: 0 2em;
+  }
+
+  nav {
     display: none;
   }
 
@@ -145,7 +148,7 @@ select {
 /* SINGLE PRODUCT */
 .single-product-grid {
   display: grid;
-  padding: 4rem 2rem;
+  padding: 2rem;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(400px, 3fr));
 }
@@ -167,7 +170,7 @@ select {
 /* LOGIN LOGOUT */
 .auth-grid {
   display: grid;
-  padding: 4rem 2rem;
+  padding: 2rem;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(400px, 3fr));
 }
@@ -189,6 +192,7 @@ select {
 form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 form div {
