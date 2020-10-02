@@ -15,7 +15,17 @@ const AuthForm = props => {
         />
       </div>
       <div className="auth-card">
-        {name === 'login' ? <h2>Login</h2> : <h2>Create an Account</h2>}
+        {name === 'login' ? <h2>Login</h2> : <h2>Create Account</h2>}
+        <div className="google-icon">
+          <a href="/auth/google">
+            <i className="fab fa-google-plus-g" />
+          </a>
+        </div>
+        {name === 'login' ? (
+          <p>or use your account</p>
+        ) : (
+          <p>or use your email for registration</p>
+        )}
         <form onSubmit={handleSubmit} name={name}>
           <div>
             <input name="email" type="text" placeholder="Email" />
@@ -28,7 +38,6 @@ const AuthForm = props => {
           </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-        <a href="/auth/google">{displayName} with Google</a>
       </div>
     </div>
   )

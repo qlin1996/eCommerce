@@ -45,6 +45,17 @@ select {
   position: relative;
 }
 
+button {
+  border-radius: 20px;
+  border: 1px solid darkgoldenrod;
+  background-color: darkgoldenrod;
+  color: #ffffff;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  padding: 12px 45px;
+  font-weight: bold;
+}
+
 /* NAV BAR */
 .fa-bars {
   position: absolute;
@@ -198,4 +209,26 @@ form {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.google-icon {
+  border: solid 1px;
+  height: 2em;
+  width: 2em;
+  color: lightgray;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.fa-google-plus-g {
+  padding-top: 7px;
+  color: black;
+}
+
+input {
+  padding: 1em;
+  background-color: #eee;
+  border: none;
 }
