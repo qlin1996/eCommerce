@@ -18,7 +18,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
         {isLoggedIn ? (
           <React.Fragment>
             {/* After you login */}
-            <div className="flex-column">
+            <div className={navClicked ? 'flex-column' : null}>
               <Link to="/home" onClick={() => setNavClicked(false)}>
                 Home
               </Link>
@@ -26,7 +26,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 All Products
               </Link>
             </div>
-            <div className="flex-column">
+            <div className={navClicked ? 'flex-column' : null}>
               <a
                 href="#"
                 onClick={() => {
@@ -50,7 +50,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
         ) : (
           <React.Fragment>
             {/* Before you login */}
-            <div className="flex-column">
+            <div className={navClicked ? 'flex-column' : null}>
               <Link to="/products" onClick={() => setNavClicked(false)}>
                 All Products
               </Link>
@@ -65,7 +65,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 </Link>
               </React.Fragment>
             ) : (
-              <div className="flex-column">
+              <div>
                 <Link to="/login" onClick={() => setNavClicked(false)}>
                   <i className="fas fa-user-alt" />
                 </Link>
