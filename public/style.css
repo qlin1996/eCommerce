@@ -13,6 +13,11 @@ h1 {
   padding: 1em 0 0.5em 0;
 }
 
+h2,
+p {
+  text-align: center;
+}
+
 header {
   position: sticky;
   top: 0;
@@ -35,10 +40,6 @@ nav a {
 
 select {
   margin-left: 0.5em;
-}
-
-.text-align-center {
-  text-align: center;
 }
 
 #app {
@@ -191,6 +192,7 @@ button {
   flex-direction: column;
   padding: 15px;
   justify-content: center;
+  align-items: center;
 }
 
 .auth-img {
@@ -204,11 +206,13 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 60%;
 }
 
 form div {
-  margin: 1em;
-  display: inline-block;
+  margin: 0.5em;
+  display: flex;
+  justify-content: center;
 }
 
 .google-icon {
@@ -231,4 +235,11 @@ input {
   padding: 1em;
   background-color: #eee;
   border: none;
+  margin: 0.5em;
+}
+
+@media screen and (max-width: 480px) {
+  .auth-img {
+    display: none;
+  }
 }

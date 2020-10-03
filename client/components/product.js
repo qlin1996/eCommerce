@@ -26,13 +26,9 @@ class Product extends React.Component {
           <img src={product.imageUrl} className="single-product-img " />
         </div>
         <div className="single-product-card">
-          <h2 className="text-align-center">
-            {product.name && this.capitalizeFirstLetter(product.name)}
-          </h2>
-          <p className="text-align-center">{product.description}</p>
-          <p className="text-align-center">
-            $ {product.price && product.price.toFixed(2)}
-          </p>
+          <h2>{product.name && this.capitalizeFirstLetter(product.name)}</h2>
+          <p>{product.description}</p>
+          <p>$ {product.price && product.price.toFixed(2)}</p>
         </div>
       </div>
     )

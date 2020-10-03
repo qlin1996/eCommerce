@@ -27,12 +27,8 @@ const AuthForm = props => {
           <p>or use your email for registration</p>
         )}
         <form onSubmit={handleSubmit} name={name}>
-          <div>
-            <input name="email" type="text" placeholder="Email" />
-          </div>
-          <div>
-            <input name="password" type="password" placeholder="Password" />
-          </div>
+          <input name="email" type="text" placeholder="Email" />
+          <input name="password" type="password" placeholder="Password" />
           <div>
             <button type="submit">{displayName}</button>
           </div>
