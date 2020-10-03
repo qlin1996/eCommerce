@@ -33,6 +33,12 @@ const AuthForm = props => {
           )}
 
         <form onSubmit={handleSubmit} name={name}>
+          {name === 'login' ? null : (
+            <React.Fragment>
+              <input name="firstName" type="text" placeholder="First Name" />
+              <input name="lastName" type="text" placeholder="Last Name" />
+            </React.Fragment>
+          )}
           <input name="email" type="text" placeholder="Email" />
           <input name="password" type="password" placeholder="Password" />
           <div>
