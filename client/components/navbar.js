@@ -41,10 +41,10 @@ const Navbar = ({handleClick, isLoggedIn}) => {
               All Products
             </Link>
             <Link to="/login" onClick={() => setNavClicked(false)}>
-              Login
+              <i className="fas fa-user-alt" />
             </Link>
-            <Link to="/signup" onClick={() => setNavClicked(false)}>
-              Sign Up
+            <Link to="/cart" onClick={() => setNavClicked(false)}>
+              <i className="fas fa-shopping-cart" />
             </Link>
           </React.Fragment>
         )}

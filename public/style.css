@@ -52,9 +52,9 @@ button {
   background-color: darkgoldenrod;
   color: #ffffff;
   text-transform: uppercase;
-  transition: transform 80ms ease-in;
   padding: 12px 45px;
   font-weight: bold;
+  outline: none;
 }
 
 /* NAV BAR */
@@ -196,9 +196,6 @@ button {
 }
 
 .auth-img {
-  display: flex;
-  justify-content: center;
-  max-height: 100%;
   max-width: 100%;
 }
 
@@ -236,6 +233,14 @@ input {
   background-color: #eee;
   border: none;
   margin: 0.5em;
+}
+
+.error {
+  color: red;
+}
+
+.auth-question {
+  margin: 1em 0;
 }
 
 @media screen and (max-width: 480px) {

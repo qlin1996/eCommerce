@@ -5,8 +5,8 @@ const db = require('../server/db')
 const {
   User,
   Product,
-  Order,
-  OrderItem,
+  Cart,
+  CartItem,
   BillingAddress,
   ShippingAddress
 } = require('../server/db/models')
@@ -145,23 +145,23 @@ async function seed() {
     products.push(earring.dataValues)
   }
 
-  // order
+  // cart
   await Promise.all([
-    Order.create({
+    Cart.create({
       userId: 2,
-      totalOrderPrice: 112.16,
+      totalCartPrice: 112.16,
       dateSubmitted: new Date(),
       shippingAddressId: 1
     })
   ])
 
-  // orderItems
+  // cartItems
   await Promise.all([
-    OrderItem.create({
-      orderItemQuantity: 2,
-      orderItemPrice: 56.08,
+    CartItem.create({
+      cartItemQuantity: 2,
+      cartItemPrice: 56.08,
       productId: 12,
-      orderId: 1
+      cartId: 1
     })
   ])
 

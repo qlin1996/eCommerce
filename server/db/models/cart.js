@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Order = db.define('order', {
+const Cart = db.define('cart', {
   status: {
     type: Sequelize.ENUM('CREATED', 'PROCESSING', 'CANCELLED', 'COMPLETED'),
     defaultValue: 'CREATED'
   },
-  totalOrderPrice: {
+  totalCartPrice: {
     type: Sequelize.FLOAT,
     validate: {
       isNumeric: true,
@@ -18,4 +18,4 @@ const Order = db.define('order', {
   }
 })
 
-module.exports = Order
+module.exports = Cart
