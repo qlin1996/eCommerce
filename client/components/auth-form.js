@@ -36,13 +36,15 @@ const AuthForm = props => {
           <input name="email" type="text" placeholder="Email" />
           <input name="password" type="password" placeholder="Password" />
           <div>
-            <button type="submit">{displayName}</button>
+            <button className="button" type="submit">
+              {displayName}
+            </button>
           </div>
         </form>
 
         {name === 'login' ? (
           <small className="auth-question">
-            <Link to="/signup">New Here? Create an account here.</Link>
+            <Link to="/signup">New here? Create an account here.</Link>
           </small>
         ) : (
           <small className="auth-question">

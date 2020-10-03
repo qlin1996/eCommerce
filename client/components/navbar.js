@@ -17,35 +17,63 @@ const Navbar = ({handleClick, isLoggedIn}) => {
         <i className="fas fa-times" onClick={() => setNavClicked(false)} />
         {isLoggedIn ? (
           <React.Fragment>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home" onClick={() => setNavClicked(false)}>
-              Home
-            </Link>
-            <Link to="/products" onClick={() => setNavClicked(false)}>
-              All Products
-            </Link>
-            <a
-              href="#"
-              onClick={() => {
-                setNavClicked(false)
-                handleClick()
-              }}
-            >
-              Logout
-            </a>
+            {/* After you login */}
+            <div className="flex-column">
+              <Link to="/home" onClick={() => setNavClicked(false)}>
+                Home
+              </Link>
+              <Link to="/products" onClick={() => setNavClicked(false)}>
+                All Products
+              </Link>
+            </div>
+            <div className="flex-column">
+              <a
+                href="#"
+                onClick={() => {
+                  setNavClicked(false)
+                  handleClick()
+                }}
+              >
+                Logout
+              </a>
+              {navClicked ? (
+                <Link to="/cart" onClick={() => setNavClicked(false)}>
+                  Cart
+                </Link>
+              ) : (
+                <Link to="/cart" onClick={() => setNavClicked(false)}>
+                  <i className="fas fa-shopping-cart" />
+                </Link>
+              )}
+            </div>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/products" onClick={() => setNavClicked(false)}>
-              All Products
-            </Link>
-            <Link to="/login" onClick={() => setNavClicked(false)}>
-              <i className="fas fa-user-alt" />
-            </Link>
-            <Link to="/cart" onClick={() => setNavClicked(false)}>
-              <i className="fas fa-shopping-cart" />
-            </Link>
+            {/* Before you login */}
+            <div className="flex-column">
+              <Link to="/products" onClick={() => setNavClicked(false)}>
+                All Products
+              </Link>
+            </div>
+            {navClicked ? (
+              <React.Fragment>
+                <Link to="/login" onClick={() => setNavClicked(false)}>
+                  Login
+                </Link>
+                <Link to="/cart" onClick={() => setNavClicked(false)}>
+                  Cart
+                </Link>
+              </React.Fragment>
+            ) : (
+              <div className="flex-column">
+                <Link to="/login" onClick={() => setNavClicked(false)}>
+                  <i className="fas fa-user-alt" />
+                </Link>
+                <Link to="/cart" onClick={() => setNavClicked(false)}>
+                  <i className="fas fa-shopping-cart" />
+                </Link>
+              </div>
+            )}
           </React.Fragment>
         )}
       </nav>

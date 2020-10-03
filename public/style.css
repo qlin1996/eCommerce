@@ -30,7 +30,9 @@ label {
 }
 
 nav {
-  margin-left: 20px;
+  margin: 0 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 nav a {
@@ -46,7 +48,7 @@ select {
   position: relative;
 }
 
-button {
+.button {
   border-radius: 20px;
   border: 1px solid darkgoldenrod;
   background-color: darkgoldenrod;
@@ -58,6 +60,11 @@ button {
 }
 
 /* NAV BAR */
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .fa-bars {
   position: absolute;
   top: 1.5em;
@@ -75,10 +82,7 @@ button {
 }
 
 @media screen and (max-width: 480px) {
-  .fa-bars {
-    display: block;
-  }
-
+  .fa-bars,
   .fa-times {
     display: block;
   }
@@ -102,6 +106,7 @@ button {
     height: 100vh;
     padding-top: 4em;
     padding-left: 2em;
+    justify-content: flex-start;
   }
 
   #app .filter-sort {
@@ -182,7 +187,6 @@ button {
 /* LOGIN LOGOUT */
 .auth-grid {
   display: grid;
-  padding: 2rem;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(400px, 3fr));
 }
