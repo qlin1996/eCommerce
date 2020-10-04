@@ -13,11 +13,20 @@ class Cart extends React.Component {
     await this.props.fetchCartThunk(this.props.user.id)
   }
 
+  capitalizeFirstLetter = str => {
+    let arr = str.toLowerCase().split(' ')
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1)
+    }
+    return arr.join(' ')
+  }
+
   render() {
     const cart = this.props.cart
+    const products = this.props.cart.products || []
+    console.log('products in cart', products)
     return (
       <div className="wrap">
-        {' '}
         <div className="heading">
           <h2>My Cart</h2>
           <div>
@@ -26,10 +35,28 @@ class Cart extends React.Component {
             </Link>
           </div>
         </div>
-        <div>
-          <img />
-        </div>
-        <div>
+        {products.map(product => (
+          <div key={product.id} className="item">
+            <div className="flex">
+              <img className="item-img" src={product.imageUrl} />
+              <div className="item-info">
+                <h3>{this.capitalizeFirstLetter(product.name)}</h3>
+                <div className="qty-and-price">
+                  <input
+                    className="qty"
+                    type="number"
+                    placeholder={product.cartItem.cartItemQuantity}
+                  />
+                  <p> x ${product.cartItem.cartItemPrice}</p>
+                </div>
+              </div>
+            </div>
+            <div className="item-total">
+              <h3>${product.price}</h3>
+            </div>
+          </div>
+        ))}
+        <div className="totals">
           <ul>
             <li className="total-row">
               <span className="label">Subtotal</span>
