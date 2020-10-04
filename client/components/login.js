@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {login} from '../store'
+import {login, me} from '../store/user'
 import {Link} from 'react-router-dom'
 
 const Login = props => {
@@ -58,6 +58,7 @@ const mapDispatch = dispatch => {
       const email = evt.target.email.value
       const password = evt.target.password.value
       dispatch(login(email, password))
+      dispatch(me())
     }
   }
 }

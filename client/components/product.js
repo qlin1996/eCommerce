@@ -29,6 +29,11 @@ class Product extends React.Component {
           <h2>{product.name && this.capitalizeFirstLetter(product.name)}</h2>
           <p>{product.description}</p>
           <p>$ {product.price && product.price.toFixed(2)}</p>
+          <div>
+            <button className="button" type="submit">
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
     )

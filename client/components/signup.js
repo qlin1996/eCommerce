@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {signup} from '../store'
+import {signup} from '../store/user'
 import {Link} from 'react-router-dom'
 
 const Signup = props => {

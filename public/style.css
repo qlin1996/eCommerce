@@ -54,7 +54,7 @@ select {
   background-color: darkgoldenrod;
   color: #ffffff;
   text-transform: uppercase;
-  padding: 12px 45px;
+  padding: 12px 30px;
   font-weight: bold;
   outline: none;
 }
@@ -176,6 +176,7 @@ select {
   padding: 15px;
   justify-content: center;
   background-color: #fafafa;
+  align-items: center;
 }
 
 .single-product-img {
@@ -251,4 +252,53 @@ input {
   .auth-img {
     display: none;
   }
+}
+
+/* CART */
+.wrap {
+  width: 75%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 5% 0;
+  margin-bottom: 5em;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #d0d0d0;
+  margin-bottom: 1em;
+}
+
+.continue {
+  border-radius: 20px;
+  border: 1px solid darkgoldenrod;
+  background-color: darkgoldenrod;
+  color: #ffffff;
+  text-transform: uppercase;
+  padding: 7px 15px;
+  font-weight: bold;
+  outline: none;
+  font-size: 0.6em;
+}
+
+.total-row {
+  padding: 0.5em 0;
+  text-align: right;
+  list-style-type: none;
+}
+
+.total-row span {
+  padding: 0 0 0 1em;
+}
+
+.label {
+  font-size: 0.85em;
+  text-transform: uppercase;
+}
+
+.final {
+  font-size: 1.25em;
+  font-weight: bold;
 }
