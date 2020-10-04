@@ -347,9 +347,24 @@ input {
 .item-total {
   margin: 3.5em 2em;
   align-self: end;
+  display: flex;
+}
+
+.fa-times-circle {
+  margin: auto 0 auto 1em;
 }
 
 .totals {
   border-top: 1px solid #d0d0d0;
   margin-top: 2em;
+}
+
+@media screen and (max-width: 480px) {
+  .item {
+    flex-direction: column;
+    align-items: center;
+  }
+  .item-total {
+    margin: 0 auto;
+  }
 }

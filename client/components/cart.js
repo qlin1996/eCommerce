@@ -53,6 +53,7 @@ class Cart extends React.Component {
             </div>
             <div className="item-total">
               <h3>${product.price}</h3>
+              <i className="far fa-times-circle" />
             </div>
           </div>
         ))}
