@@ -6,12 +6,17 @@ const Cart = db.define('cart', {
     type: Sequelize.ENUM('created', 'processing', 'cancelled', 'completed'),
     defaultValue: 'created'
   },
-  totalCartPrice: {
-    type: Sequelize.FLOAT,
-    validate: {
-      isNumeric: true,
-      min: 1
-    }
+  cartSubTotal: {
+    type: Sequelize.FLOAT
+  },
+  cartShipping: {
+    type: Sequelize.FLOAT
+  },
+  cartTax: {
+    type: Sequelize.FLOAT
+  },
+  cartTotal: {
+    type: Sequelize.FLOAT
   },
   dateSubmitted: {
     type: Sequelize.DATE

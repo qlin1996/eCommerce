@@ -149,7 +149,10 @@ async function seed() {
   await Promise.all([
     Cart.create({
       userId: 2,
-      totalCartPrice: 112.16,
+      cartSubTotal: 112.16,
+      cartShipping: 5.0,
+      cartTax: 9.95,
+      cartTotal: 137.06,
       dateSubmitted: new Date(),
       shippingAddressId: 1
     })

@@ -61,19 +61,27 @@ class Cart extends React.Component {
           <ul>
             <li className="total-row">
               <span className="label">Subtotal</span>
-              <span className="value">${cart.totalCartPrice}</span>
+              <span className="value">
+                ${cart.cartSubTotal && cart.cartSubTotal.toFixed(2)}
+              </span>
             </li>
             <li className="total-row">
               <span className="label">shipping</span>
-              <span className="value">${cart.totalCartPrice}</span>
+              <span className="value">
+                ${cart.cartShipping && cart.cartShipping.toFixed(2)}
+              </span>
             </li>
             <li className="total-row">
               <span className="label">tax</span>
-              <span className="value">${cart.totalCartPrice}</span>
+              <span className="value">
+                ${cart.cartTax && cart.cartTax.toFixed(2)}
+              </span>
             </li>
             <li className="total-row final">
               <span className="label">total</span>
-              <span className="value">${cart.totalCartPrice}</span>
+              <span className="value">
+                ${cart.cartTotal && cart.cartTotal.toFixed(2)}
+              </span>
             </li>
             <li className="total-row">
               <button className="button" type="submit">
