@@ -21,7 +21,6 @@ const updateProduct = product => ({
 export const fetchProductThunk = productId => {
   return async dispatch => {
     try {
-      console.log('here')
       const {data: product} = await axios.get(`/api/products/${productId}`)
       dispatch(getProduct(product))
     } catch (error) {

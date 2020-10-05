@@ -1,11 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {fetchCartThunk} from '../store/cart'
+import {me} from '../store/user'
 
 /**
  * COMPONENT
  */
 class Cart extends React.Component {
+  async componentDidMount() {
+    await this.props.me()
+    await this.props.fetchCartThunk(this.props.user.id)
+  }
+
   capitalizeFirstLetter = str => {
     let arr = str.toLowerCase().split(' ')
     for (let i = 0; i < arr.length; i++) {
@@ -17,7 +24,6 @@ class Cart extends React.Component {
   render() {
     const cart = this.props.cart
     const products = this.props.cart.products || []
-    console.log('products in cart', products)
     return (
       <div className="wrap">
         <div className="heading">
@@ -92,9 +98,13 @@ class Cart extends React.Component {
  * CONTAINER
  */
 const mapState = state => ({
-  user: state.user
+  user: state.user,
+  cart: state.cart
 })
 
-const mapDispatch = dispatch => ({})
+const mapDispatch = dispatch => ({
+  me: () => dispatch(me()),
+  fetchCartThunk: userId => dispatch(fetchCartThunk(userId))
+})
 
 export default connect(mapState, mapDispatch)(Cart)

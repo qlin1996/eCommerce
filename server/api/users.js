@@ -38,11 +38,16 @@ router.get('/:userId/cart', async (req, res, next) => {
 // POST api/users/:userId/cart
 router.post('/:userId/cart', async (req, res, next) => {
   try {
-    const cart = await CartItem.create({
+    await CartItem.create({
       cartId: req.body.cartId,
       productId: req.body.productId,
       cartItemQuantity: 1,
       cartItemPrice: req.body.cartItemPrice
+    })
+    const cart = await Cart.findOne({
+      where: {userId: req.params.userId, status: 'created'},
+      include: [{model: Product}],
+      order: [[{model: Product}, 'name', 'ASC']]
     })
     res.json(cart)
   } catch (err) {

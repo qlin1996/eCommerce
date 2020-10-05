@@ -3,7 +3,7 @@ const db = require('../db')
 
 const Cart = db.define('cart', {
   status: {
-    type: Sequelize.ENUM('created', 'processing', 'cancelled', 'completed'),
+    type: Sequelize.ENUM('created', 'completed'),
     defaultValue: 'created'
   },
   cartSubTotal: {
