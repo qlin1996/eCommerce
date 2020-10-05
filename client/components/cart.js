@@ -11,7 +11,6 @@ class Cart extends React.Component {
   async componentDidMount() {
     await this.props.me()
     await this.props.fetchCartThunk(this.props.user.id)
-    console.log('cart', this.props.cart)
   }
 
   capitalizeFirstLetter = str => {
@@ -38,7 +37,7 @@ class Cart extends React.Component {
       .reduce((accum, currentVal) => accum + currentVal, 0)
     const shipping = 5.0
     const taxRate = 0.08875
-    console.log('products in cart', products)
+
     return (
       <div className="wrap">
         <div className="heading">
