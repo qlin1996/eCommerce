@@ -26,7 +26,27 @@ export const fetchCartThunk = userId => {
   }
 }
 
-export const updateCartThunk = (userId, cartId, productId, cartItemPrice) => {
+export const addToCartThunk = (userId, cartId, productId, cartItemPrice) => {
+  return async dispatch => {
+    try {
+      const {data: cart} = await axios.post(`/api/users/${userId}/cart`, {
+        cartId,
+        productId,
+        cartItemPrice
+      })
+      dispatch(updateCart(cart))
+    } catch (error) {
+      console.log('ERROR ADDING TO CART>>>', error)
+    }
+  }
+}
+
+export const deleteCartItemThunk = (
+  userId,
+  cartId,
+  productId,
+  cartItemPrice
+) => {
   return async dispatch => {
     try {
       const {data: cart} = await axios.post(`/api/users/${userId}/cart`, {

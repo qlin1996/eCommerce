@@ -54,3 +54,20 @@ router.post('/:userId/cart', async (req, res, next) => {
     next(err)
   }
 })
+
+// DELETE api/users/:userId/cart
+router.delete('/:userId/cart', async (req, res, next) => {
+  try {
+    await CartItem.destroy({
+      where: {cartId: req.body.cartId, productId: req.body.productId}
+    })
+    const cart = await Cart.findOne({
+      where: {userId: req.params.userId, status: 'created'},
+      include: [{model: Product}],
+      order: [[{model: Product}, 'name', 'ASC']]
+    })
+    res.json(cart)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -11,6 +11,7 @@ class Cart extends React.Component {
   async componentDidMount() {
     await this.props.me()
     await this.props.fetchCartThunk(this.props.user.id)
+    console.log('cart', this.props.cart)
   }
 
   capitalizeFirstLetter = str => {
@@ -24,6 +25,12 @@ class Cart extends React.Component {
   render() {
     const cart = this.props.cart
     const products = this.props.cart.products || []
+    const subTotal = products
+      .map(product => product.price * product.cartItem.cartItemQuantity)
+      .reduce((accum, currentVal) => accum + currentVal, 0)
+    const shipping = 5.0
+    const taxRate = 0.08875
+    console.log('products in cart', products)
     return (
       <div className="wrap">
         <div className="heading">
@@ -46,12 +53,12 @@ class Cart extends React.Component {
                     type="number"
                     placeholder={product.cartItem.cartItemQuantity}
                   />
-                  <p> x ${product.cartItem.cartItemPrice}</p>
+                  <p> x ${product.price}</p>
                 </div>
               </div>
             </div>
             <div className="item-total">
-              <h3>${product.price}</h3>
+              <h3>${product.price * product.cartItem.cartItemQuantity}</h3>
               <i className="far fa-times-circle" />
             </div>
           </div>
@@ -60,26 +67,20 @@ class Cart extends React.Component {
           <ul>
             <li className="total-row">
               <span className="label">Subtotal</span>
-              <span className="value">
-                ${cart.cartSubTotal && cart.cartSubTotal.toFixed(2)}
-              </span>
+              <span className="value">${subTotal.toFixed(2)}</span>
             </li>
             <li className="total-row">
               <span className="label">shipping</span>
-              <span className="value">
-                ${cart.cartShipping && cart.cartShipping.toFixed(2)}
-              </span>
+              <span className="value">${shipping.toFixed(2)}</span>
             </li>
             <li className="total-row">
               <span className="label">tax</span>
-              <span className="value">
-                ${cart.cartTax && cart.cartTax.toFixed(2)}
-              </span>
+              <span className="value">${(subTotal * taxRate).toFixed(2)}</span>
             </li>
             <li className="total-row final">
               <span className="label">total</span>
               <span className="value">
-                ${cart.cartTotal && cart.cartTotal.toFixed(2)}
+                ${(subTotal * (1 + taxRate)).toFixed(2)}
               </span>
             </li>
             <li className="total-row">
