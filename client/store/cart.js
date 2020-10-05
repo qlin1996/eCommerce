@@ -41,18 +41,27 @@ export const addToCartThunk = (userId, cartId, productId, cartItemPrice) => {
   }
 }
 
-export const deleteCartItemThunk = (
-  userId,
-  cartId,
-  productId,
-  cartItemPrice
-) => {
+export const deleteFromCartThunk = (userId, cartId, productId) => {
   return async dispatch => {
+    try {
+      const {data: cart} = await axios.delete(`/api/users/${userId}/cart`, {
+        cartId,
+        productId
+      })
+      dispatch(updateCart(cart))
+    } catch (error) {
+      console.log('ERROR DELETING FROM CART>>>', error)
+    }
+  }
+}
+
+export const deleteCartItemThunk = (userId, cartId, productId) => {
+  return async dispatch => {
+    console.log('>>>>>>>', userId, cartId, productId)
     try {
       const {data: cart} = await axios.post(`/api/users/${userId}/cart`, {
         cartId,
-        productId,
-        cartItemPrice
+        productId
       })
       dispatch(updateCart(cart))
     } catch (error) {

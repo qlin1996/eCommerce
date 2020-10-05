@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchCartThunk} from '../store/cart'
+import {fetchCartThunk, deleteFromCartThunk} from '../store/cart'
 import {me} from '../store/user'
 
 /**
@@ -22,8 +22,16 @@ class Cart extends React.Component {
     return arr.join(' ')
   }
 
+  handleDelete = async (productId, event) => {
+    event.preventDefault()
+    await this.props.deleteFromCartThunk(
+      this.props.user.id,
+      this.props.cart.id,
+      productId
+    )
+  }
+
   render() {
-    const cart = this.props.cart
     const products = this.props.cart.products || []
     const subTotal = products
       .map(product => product.price * product.cartItem.cartItemQuantity)
@@ -59,7 +67,10 @@ class Cart extends React.Component {
             </div>
             <div className="item-total">
               <h3>${product.price * product.cartItem.cartItemQuantity}</h3>
-              <i className="far fa-times-circle" />
+              <i
+                className="far fa-times-circle"
+                onClick={event => this.handleDelete(product.id, event)}
+              />
             </div>
           </div>
         ))}
@@ -105,7 +116,9 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   me: () => dispatch(me()),
-  fetchCartThunk: userId => dispatch(fetchCartThunk(userId))
+  fetchCartThunk: userId => dispatch(fetchCartThunk(userId)),
+  deleteFromCartThunk: (userId, cartId, productId) =>
+    dispatch(deleteFromCartThunk(userId, cartId, productId))
 })
 
 export default connect(mapState, mapDispatch)(Cart)
