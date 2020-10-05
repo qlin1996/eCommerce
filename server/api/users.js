@@ -71,3 +71,26 @@ router.delete('/:userId/cart', async (req, res, next) => {
     next(err)
   }
 })
+
+// PATCH api/users/:userId/cart
+router.patch('/:userId/cart', async (req, res, next) => {
+  try {
+    await CartItem.update(
+      {cartItemQuantity: req.body.cartItemQuantity},
+      {
+        where: {
+          cartId: req.body.cartId,
+          productId: req.body.productId
+        }
+      }
+    )
+    const cart = await Cart.findOne({
+      where: {userId: req.params.userId, status: 'created'},
+      include: [{model: Product}],
+      order: [[{model: Product}, 'name', 'ASC']]
+    })
+    res.json(cart)
+  } catch (error) {
+    next(error)
+  }
+})

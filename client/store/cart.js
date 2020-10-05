@@ -54,6 +54,26 @@ export const deleteFromCartThunk = (userId, cartId, productId) => {
   }
 }
 
+export const updateQtyInCartThunk = (
+  userId,
+  cartId,
+  productId,
+  cartItemQuantity
+) => {
+  return async dispatch => {
+    try {
+      const {data: cart} = await axios.post(`/api/users/${userId}/cart`, {
+        cartId,
+        productId,
+        cartItemQuantity
+      })
+      dispatch(updateCart(cart))
+    } catch (error) {
+      console.log('ERROR QTY IN CART>>>', error)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
