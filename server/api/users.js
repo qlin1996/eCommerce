@@ -30,12 +30,7 @@ router.get('/:userId/cart', async (req, res, next) => {
       order: [[{model: Product}, 'name', 'ASC']]
     })
     if (!cart) {
-      await CartItem.create({
-        cartId: req.body.cartId,
-        productId: req.body.productId,
-        cartItemQuantity: 1,
-        cartItemPrice: req.body.cartItemPrice
-      })
+      await Cart.create({userId: req.params.userId})
     }
     cart = await Cart.findOne({
       where: {userId: req.params.userId, status: 'created'},
