@@ -6,19 +6,6 @@ import {updateQtyInCartThunk, deleteFromCartThunk} from '../store/cart'
  * COMPONENT
  */
 class CartItem extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      cartItemQuantity: 0
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      cartItemQuantity: this.props.product.cartItem.cartItemQuantity
-    })
-  }
-
   capitalizeFirstLetter = str => {
     let arr = str.toLowerCase().split(' ')
     for (let i = 0; i < arr.length; i++) {
@@ -36,18 +23,6 @@ class CartItem extends React.Component {
     )
   }
 
-  handleChange = async (productId, event) => {
-    this.setState({
-      cartItemQuantity: event.target.value
-    })
-    await updateQtyInCartThunk(
-      this.props.user.id,
-      this.props.cart.id,
-      productId,
-      this.state.cartItemQuantity
-    )
-  }
-
   render() {
     const product = this.props.product
     return (
@@ -57,13 +32,12 @@ class CartItem extends React.Component {
           <div className="item-info">
             <h3>{this.capitalizeFirstLetter(product.name)}</h3>
             <div className="qty-and-price">
-              <input
-                className="qty"
-                type="number"
-                value={this.state.cartItemQuantity}
-                onChange={event => this.handleDelete(product.id, event)}
-              />
-              <p> x ${product.price}</p>
+              <div className="flex">
+                <i className="far fa-minus-square" onClick={this.minus} />
+                <p>{this.props.product.cartItem.cartItemQuantity}</p>
+                <i className="far fa-plus-square" onClick={this.plus} />
+              </div>
+              <p className="price"> x ${product.price}</p>
             </div>
           </div>
         </div>
