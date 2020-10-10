@@ -24,12 +24,20 @@ class CartItem extends React.Component {
   }
 
   minus = async () => {
-    await this.props.updateQtyInCartThunk(
-      this.props.user.id,
-      this.props.cart.id,
-      this.props.product.id,
-      this.props.product.cartItem.cartItemQuantity - 1
-    )
+    if (this.props.product.cartItem.cartItemQuantity) {
+      await this.props.deleteFromCartThunk(
+        this.props.user.id,
+        this.props.cart.id,
+        this.props.product.id
+      )
+    } else {
+      await this.props.updateQtyInCartThunk(
+        this.props.user.id,
+        this.props.cart.id,
+        this.props.product.id,
+        this.props.product.cartItem.cartItemQuantity - 1
+      )
+    }
   }
 
   plus = async () => {
