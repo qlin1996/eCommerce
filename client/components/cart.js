@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchCartThunk, deleteFromCartThunk} from '../store/cart'
+import {fetchCartThunk} from '../store/cart'
 import {me} from '../store/user'
 import CartItem from './cart-item'
 
@@ -79,9 +79,7 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   me: () => dispatch(me()),
-  fetchCartThunk: userId => dispatch(fetchCartThunk(userId)),
-  deleteFromCartThunk: (userId, cartId, productId) =>
-    dispatch(deleteFromCartThunk(userId, cartId, productId))
+  fetchCartThunk: userId => dispatch(fetchCartThunk(userId))
 })
 
 export default connect(mapState, mapDispatch)(Cart)

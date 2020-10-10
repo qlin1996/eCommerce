@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {updateQtyInCartThunk} from '../store/cart'
+import {updateQtyInCartThunk, deleteFromCartThunk} from '../store/cart'
 
 /**
  * COMPONENT
@@ -89,7 +89,9 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   updateQtyInCartThunk: (userId, cartId, productId, cartItemQuantity) =>
-    dispatch(updateQtyInCartThunk(userId, cartId, productId, cartItemQuantity))
+    dispatch(updateQtyInCartThunk(userId, cartId, productId, cartItemQuantity)),
+  deleteFromCartThunk: (userId, cartId, productId) =>
+    dispatch(deleteFromCartThunk(userId, cartId, productId))
 })
 
 export default connect(mapState, mapDispatch)(CartItem)
