@@ -11,6 +11,7 @@ import CartItem from './cart-item'
 class Cart extends React.Component {
   async componentDidMount() {
     await this.props.me()
+    console.log(this.props.user)
     await this.props.fetchCartThunk(this.props.user.id)
   }
 
@@ -54,7 +55,7 @@ class Cart extends React.Component {
             <li className="total-row final">
               <span className="label">total</span>
               <span className="value">
-                ${(subTotal * (1 + taxRate)).toFixed(2)}
+                ${(subTotal * (1 + taxRate) + shipping).toFixed(2)}
               </span>
             </li>
             <li className="total-row">

@@ -24,7 +24,20 @@ router.get('/', async (req, res, next) => {
 // GET api/users/:userId/cart
 router.get('/:userId/cart', async (req, res, next) => {
   try {
-    const cart = await Cart.findOne({
+    let cart = await Cart.findOne({
+      where: {userId: req.params.userId, status: 'created'},
+      include: [{model: Product}],
+      order: [[{model: Product}, 'name', 'ASC']]
+    })
+    if (!cart) {
+      await CartItem.create({
+        cartId: req.body.cartId,
+        productId: req.body.productId,
+        cartItemQuantity: 1,
+        cartItemPrice: req.body.cartItemPrice
+      })
+    }
+    cart = await Cart.findOne({
       where: {userId: req.params.userId, status: 'created'},
       include: [{model: Product}],
       order: [[{model: Product}, 'name', 'ASC']]
