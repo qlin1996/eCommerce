@@ -14,12 +14,30 @@ class CartItem extends React.Component {
     return arr.join(' ')
   }
 
-  handleDelete = async (productId, event) => {
+  handleDelete = async event => {
     event.preventDefault()
     await this.props.deleteFromCartThunk(
       this.props.user.id,
       this.props.cart.id,
-      productId
+      this.props.product.id
+    )
+  }
+
+  minus = async () => {
+    await this.props.updateQtyInCartThunk(
+      this.props.user.id,
+      this.props.cart.id,
+      this.props.product.id,
+      this.props.product.cartItem.cartItemQuantity - 1
+    )
+  }
+
+  plus = async () => {
+    await this.props.updateQtyInCartThunk(
+      this.props.user.id,
+      this.props.cart.id,
+      this.props.product.id,
+      this.props.product.cartItem.cartItemQuantity + 1
     )
   }
 
@@ -42,10 +60,12 @@ class CartItem extends React.Component {
           </div>
         </div>
         <div className="item-total">
-          <h3>${product.price * product.cartItem.cartItemQuantity}</h3>
+          <h3>
+            ${(product.price * product.cartItem.cartItemQuantity).toFixed(2)}
+          </h3>
           <i
             className="far fa-times-circle"
-            onClick={event => this.handleDelete(product.id, event)}
+            onClick={event => this.handleDelete(event)}
           />
         </div>
       </React.Fragment>

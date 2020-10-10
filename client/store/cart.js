@@ -63,14 +63,14 @@ export const updateQtyInCartThunk = (
 ) => {
   return async dispatch => {
     try {
-      const {data: cart} = await axios.post(`/api/users/${userId}/cart`, {
+      const {data: cart} = await axios.patch(`/api/users/${userId}/cart`, {
         cartId,
         productId,
         cartItemQuantity
       })
       dispatch(updateCart(cart))
     } catch (error) {
-      console.log('ERROR QTY IN CART>>>', error)
+      console.log('ERROR UPDATING QTY IN CART>>>', error)
     }
   }
 }
