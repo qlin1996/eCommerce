@@ -330,10 +330,12 @@ input {
   flex-direction: column;
   align-items: flex-start;
   margin: 1.5em 2em;
+  justify-content: center;
 }
 
 .item-info h3 {
   margin-block-end: 0em;
+  margin-block-start: 0em;
 }
 
 .price {
@@ -353,6 +355,16 @@ input {
 .qty-and-price {
   display: flex;
   flex-direction: column;
+}
+
+.qty-and-price p {
+  text-align: left;
+  /* margin-bottom: 0.2em;
+  margin-top: 0.2em; */
+}
+
+.qty-and-price small {
+  color: red;
 }
 
 .item-total {

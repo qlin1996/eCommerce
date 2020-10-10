@@ -24,7 +24,7 @@ class CartItem extends React.Component {
   }
 
   minus = async () => {
-    if (this.props.product.cartItem.cartItemQuantity) {
+    if (this.props.product.cartItem.cartItemQuantity === 1) {
       await this.props.deleteFromCartThunk(
         this.props.user.id,
         this.props.cart.id,
@@ -56,14 +56,20 @@ class CartItem extends React.Component {
         <div className="flex">
           <img className="item-img" src={product.imageUrl} />
           <div className="item-info">
-            <h3>{this.capitalizeFirstLetter(product.name)}</h3>
-            <div className="qty-and-price">
-              <div className="flex">
-                <i className="far fa-minus-square" onClick={this.minus} />
-                <p>{this.props.product.cartItem.cartItemQuantity}</p>
-                <i className="far fa-plus-square" onClick={this.plus} />
+            <div>
+              <h3>{this.capitalizeFirstLetter(product.name)}</h3>
+              <div className="qty-and-price">
+                {this.props.product.cartItem.cartItemQuantity >
+                product.quantityInStock ? (
+                  <small>Not enough in stock</small>
+                ) : null}
+                <div className="flex">
+                  <i className="far fa-minus-square" onClick={this.minus} />
+                  <p>{this.props.product.cartItem.cartItemQuantity}</p>
+                  <i className="far fa-plus-square" onClick={this.plus} />
+                </div>
+                <p className="price"> x ${product.price}</p>
               </div>
-              <p className="price"> x ${product.price}</p>
             </div>
           </div>
         </div>
