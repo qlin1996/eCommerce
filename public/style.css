@@ -57,6 +57,12 @@ select {
   padding: 12px 30px;
   font-weight: bold;
   outline: none;
+  transition: 0.2s all;
+}
+
+.button:active {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px darkgoldenrod;
 }
 
 .flex {
