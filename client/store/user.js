@@ -56,20 +56,6 @@ export const signup = (
   }
 }
 
-// export const login = (email, password) => async (dispatch) => {
-//   try {
-//     const {data: user} = await axios.post(`/auth/login`, {
-//       email,
-//       password,
-//     })
-//     dispatch(getUser(user))
-//     history.push('/home')
-//   } catch (error) {
-//     console.log('ERROR LOGGING IN>>>', error)
-//     throw error
-//   }
-// }
-
 export const login = (email, password) => async dispatch => {
   let res
   try {

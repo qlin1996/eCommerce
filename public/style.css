@@ -258,6 +258,11 @@ input {
   margin: 1em 0;
 }
 
+.validations {
+  color: gray;
+  text-align: center;
+}
+
 @media screen and (max-width: 480px) {
   .auth-img {
     display: none;
@@ -359,12 +364,6 @@ input {
 
 .qty-and-price p {
   text-align: left;
-  /* margin-bottom: 0.2em;
-  margin-top: 0.2em; */
-}
-
-.qty-and-price small {
-  color: red;
 }
 
 .item-total {

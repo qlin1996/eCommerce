@@ -5,13 +5,34 @@ import {Link} from 'react-router-dom'
 import {fetchCartThunk} from '../store/cart'
 
 class Login extends React.Component {
-  handleSubmit = async evt => {
-    evt.preventDefault()
-    const email = evt.target.email.value
-    const password = evt.target.password.value
+  constructor() {
+    super()
+    this.state = {
+      email: '',
+      password: ''
+    }
+  }
+
+  handleSubmit = async event => {
+    event.preventDefault()
+    const email = event.target.email.value
+    const password = event.target.password.value
     await this.props.login(email, password)
     await this.props.me()
     await this.props.fetchCartThunk(this.props.userId)
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  validateEmail = email => {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (this.state.email.length && re.test(email)) {
+      return true
+    } else return false
   }
 
   render() {
@@ -35,8 +56,24 @@ class Login extends React.Component {
           {error && <small className="error"> {error.response.data} </small>}
 
           <form onSubmit={this.handleSubmit} name={name}>
-            <input name="email" type="text" placeholder="Email" />
-            <input name="password" type="password" placeholder="Password" />
+            {!this.validateEmail(this.state.email) && (
+              <small className="validations">Valid Email is Required</small>
+            )}
+            <input
+              name="email"
+              type="text"
+              placeholder="Email"
+              onChange={this.handleChange}
+            />
+            {!this.state.password && (
+              <small className="validations">Password is Required</small>
+            )}
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={this.handleChange}
+            />
             <div>
               <button className="button" type="submit">
                 Login

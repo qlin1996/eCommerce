@@ -61,7 +61,7 @@ class CartItem extends React.Component {
               <div className="qty-and-price">
                 {this.props.product.cartItem.cartItemQuantity >
                 product.quantityInStock ? (
-                  <small>Not enough in stock</small>
+                  <small className="error">Not enough in stock</small>
                 ) : null}
                 <div className="flex">
                   <i className="far fa-minus-square" onClick={this.minus} />
