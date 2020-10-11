@@ -14,13 +14,13 @@ class Login extends React.Component {
   }
 
   handleSubmit = async event => {
-    console.log('event b4', event.defaultPrevented)
     event.preventDefault()
-    console.log('event after', event.defaultPrevented)
     if (this.validateEmail(this.state.email) && this.state.password) {
       await this.props.login(this.state.email, this.state.password)
-      await this.props.me()
-      await this.props.fetchCartThunk(this.props.userId)
+      if (!this.props.error) {
+        await this.props.me()
+        await this.props.fetchCartThunk(this.props.userId)
+      }
     }
   }
 

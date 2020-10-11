@@ -64,7 +64,6 @@ export const login = (email, password) => async dispatch => {
       password
     })
   } catch (authError) {
-    console.log('authError', authError)
     return dispatch(getUser({error: authError}))
   }
 
