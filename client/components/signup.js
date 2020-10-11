@@ -16,10 +16,7 @@ const Signup = props => {
           </a>
         </div>
         <p>or use your email for registration</p>
-        {error &&
-          error.response && (
-            <small className="error"> {error.response.data} </small>
-          )}
+        {error && <small className="error"> {error.response.data} </small>}
         <form onSubmit={handleSubmit} name={name}>
           <input name="firstName" type="text" placeholder="First Name" />
           <input name="lastName" type="text" placeholder="Last Name" />

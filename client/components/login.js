@@ -15,6 +15,7 @@ class Login extends React.Component {
   }
 
   render() {
+    const error = this.props.error
     return (
       <div className="auth-grid">
         <div className="auth-card">
@@ -31,13 +32,7 @@ class Login extends React.Component {
             </a>
           </div>
           <p>or use your account</p>
-          {this.props.error &&
-            this.props.error.response && (
-              <small className="error">
-                {' '}
-                {this.props.error.response.data}{' '}
-              </small>
-            )}
+          {error && <small className="error"> {error.response.data} </small>}
 
           <form onSubmit={this.handleSubmit} name={name}>
             <input name="email" type="text" placeholder="Email" />

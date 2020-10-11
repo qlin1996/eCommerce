@@ -25,8 +25,8 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
-  } catch (err) {
-    console.error(err)
+  } catch (error) {
+    console.log('ERROR FETCHING ME>>>', error)
   }
 }
 
@@ -36,30 +36,56 @@ export const signup = (
   firstName,
   lastName
 ) => async dispatch => {
+  let res
   try {
-    const {data: user} = await axios.post(`/auth/signup`, {
+    res = await axios.post(`/auth/signup`, {
       email,
       password,
       firstName,
       lastName
     })
-    dispatch(getUser(user))
-    history.push('/home')
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
+
+  try {
+    dispatch(getUser(res.data))
+    history.push('/')
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
+  }
 }
 
+// export const login = (email, password) => async (dispatch) => {
+//   try {
+//     const {data: user} = await axios.post(`/auth/login`, {
+//       email,
+//       password,
+//     })
+//     dispatch(getUser(user))
+//     history.push('/home')
+//   } catch (error) {
+//     console.log('ERROR LOGGING IN>>>', error)
+//     throw error
+//   }
+// }
+
 export const login = (email, password) => async dispatch => {
+  let res
   try {
-    const {data: user} = await axios.post(`/auth/login`, {
+    res = await axios.post(`/auth/login`, {
       email,
       password
     })
-    dispatch(getUser(user))
-    history.push('/home')
   } catch (authError) {
     return dispatch(getUser({error: authError}))
+  }
+
+  try {
+    dispatch(getUser(res.data))
+    history.push('/')
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
   }
 }
 
@@ -68,8 +94,8 @@ export const logout = () => async dispatch => {
     await axios.post('/auth/logout')
     dispatch(removeUser())
     history.push('/login')
-  } catch (err) {
-    console.error(err)
+  } catch (error) {
+    console.log('ERROR LOGGING OUT>>>', error)
   }
 }
 

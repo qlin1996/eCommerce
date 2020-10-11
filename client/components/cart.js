@@ -11,7 +11,6 @@ import CartItem from './cart-item'
 class Cart extends React.Component {
   async componentDidMount() {
     await this.props.me()
-    console.log(this.props.user)
     await this.props.fetchCartThunk(this.props.user.id)
   }
 
