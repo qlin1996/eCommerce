@@ -9,6 +9,23 @@ const {
 } = require('../db/models')
 module.exports = router
 
+// gate keepers
+const isAdmin = (req, res, next) => {
+  if (req.user.isAdmin) return next()
+  res.redirect('/')
+}
+
+const isSelf = (req, res, next) => {
+  if (Number(req.params.userId) === req.user.id) {
+    return next()
+  } else {
+    const err = new Error("Please don't hack")
+    err.status = 401
+    return next(err)
+  }
+  // res.redirect('/')
+}
+
 // GET api/users
 router.get('/', async (req, res, next) => {
   try {
@@ -22,7 +39,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // GET api/users/:userId/cart
-router.get('/:userId/cart', async (req, res, next) => {
+router.get('/:userId/cart', isSelf, async (req, res, next) => {
   try {
     let cart = await Cart.findOne({
       where: {userId: req.params.userId, status: 'created'},

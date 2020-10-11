@@ -146,27 +146,23 @@ async function seed() {
   }
 
   // cart
-  await Promise.all([
-    Cart.create({
-      userId: 2,
-      cartSubTotal: 112.16,
-      cartShipping: 5.0,
-      cartTax: 9.95,
-      cartTotal: 137.06,
-      dateSubmitted: new Date(),
-      shippingAddressId: 1
-    })
-  ])
+  await Cart.create({
+    userId: 2,
+    cartSubTotal: 112.16,
+    cartShipping: 5.0,
+    cartTax: 9.95,
+    cartTotal: 137.06,
+    dateSubmitted: new Date(),
+    shippingAddressId: 1
+  })
 
   // cartItems
-  await Promise.all([
-    CartItem.create({
-      cartItemQuantity: 2,
-      cartItemPrice: 56.08,
-      productId: 12,
-      cartId: 1
-    })
-  ])
+  await CartItem.create({
+    cartItemQuantity: 2,
+    cartItemPrice: 56.08,
+    productId: 12,
+    cartId: 1
+  })
 
   console.log(`seeded successfully`)
 }
