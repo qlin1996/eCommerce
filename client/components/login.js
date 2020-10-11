@@ -9,7 +9,8 @@ class Login extends React.Component {
     super()
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error: false
     }
   }
 
@@ -20,6 +21,8 @@ class Login extends React.Component {
       if (!this.props.error) {
         await this.props.me()
         await this.props.fetchCartThunk(this.props.userId)
+      } else {
+        this.setState({error: true})
       }
     }
   }
@@ -38,7 +41,6 @@ class Login extends React.Component {
   }
 
   render() {
-    const {error} = this.props
     return (
       <div className="auth-grid">
         <div className="auth-card">
@@ -56,7 +58,9 @@ class Login extends React.Component {
           </div>
           <p>or use your account</p>
 
-          {error && <small className="error"> {error.response.data} </small>}
+          {this.state.error && (
+            <small className="error"> {this.props.error.response.data} </small>
+          )}
 
           <form onSubmit={this.handleSubmit} name={name}>
             {!this.validateEmail(this.state.email) && (

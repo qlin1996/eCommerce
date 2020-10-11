@@ -10,7 +10,8 @@ class Signup extends React.Component {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''
+      password: '',
+      error: false
     }
   }
 
@@ -41,11 +42,13 @@ class Signup extends React.Component {
         this.state.firstName,
         this.state.lastName
       )
+      if (this.props.error) {
+        this.setState({error: true})
+      }
     }
   }
 
   render() {
-    const {error} = this.props
     return (
       <div className="auth-grid">
         <div className="auth-card">
@@ -56,7 +59,9 @@ class Signup extends React.Component {
             </a>
           </div>
           <p>or use your email for registration</p>
-          {error && <small className="error"> {error.response.data} </small>}
+          {this.state.error && (
+            <small className="error"> {this.props.error.response.data} </small>
+          )}
           <form onSubmit={this.handleSubmit} name={name}>
             {!this.state.firstName && (
               <small className="validations">First Name is Required</small>
