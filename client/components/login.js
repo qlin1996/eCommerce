@@ -14,12 +14,14 @@ class Login extends React.Component {
   }
 
   handleSubmit = async event => {
+    console.log('event b4', event.defaultPrevented)
     event.preventDefault()
-    const email = event.target.email.value
-    const password = event.target.password.value
-    await this.props.login(email, password)
-    await this.props.me()
-    await this.props.fetchCartThunk(this.props.userId)
+    console.log('event after', event.defaultPrevented)
+    if (this.validateEmail(this.state.email) && this.state.password) {
+      await this.props.login(this.state.email, this.state.password)
+      await this.props.me()
+      await this.props.fetchCartThunk(this.props.userId)
+    }
   }
 
   handleChange = event => {
@@ -36,7 +38,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const error = this.props.error
+    const {error} = this.props
     return (
       <div className="auth-grid">
         <div className="auth-card">
@@ -53,6 +55,7 @@ class Login extends React.Component {
             </a>
           </div>
           <p>or use your account</p>
+
           {error && <small className="error"> {error.response.data} </small>}
 
           <form onSubmit={this.handleSubmit} name={name}>

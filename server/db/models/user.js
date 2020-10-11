@@ -19,7 +19,7 @@ const User = db.define('user', {
   },
   isAdmin: {
     type: Sequelize.ENUM('yes', 'no'),
-    default: 'no'
+    defaultValue: 'no'
   },
   email: {
     type: Sequelize.STRING,

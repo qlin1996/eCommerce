@@ -27,8 +27,25 @@ class Signup extends React.Component {
     } else return false
   }
 
+  handleSubmit = async event => {
+    event.preventDefault()
+    if (
+      this.validateEmail(this.state.email) &&
+      this.state.password &&
+      this.state.firstName &&
+      this.state.lastName
+    ) {
+      await this.props.signup(
+        this.state.email,
+        this.state.password,
+        this.state.firstName,
+        this.state.lastName
+      )
+    }
+  }
+
   render() {
-    const {handleSubmit, error} = this.props
+    const {error} = this.props
     return (
       <div className="auth-grid">
         <div className="auth-card">
@@ -40,7 +57,7 @@ class Signup extends React.Component {
           </div>
           <p>or use your email for registration</p>
           {error && <small className="error"> {error.response.data} </small>}
-          <form onSubmit={handleSubmit} name={name}>
+          <form onSubmit={this.handleSubmit} name={name}>
             {!this.state.firstName && (
               <small className="validations">First Name is Required</small>
             )}
@@ -104,17 +121,9 @@ const mapSignup = state => {
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    handleSubmit(evt) {
-      evt.preventDefault()
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      const firstName = evt.target.firstName.value
-      const lastName = evt.target.lastName.value
-      dispatch(signup(email, password, firstName, lastName))
-    }
-  }
-}
+const mapDispatch = dispatch => ({
+  signup: (email, password, firstName, lastName) =>
+    dispatch(signup(email, password, firstName, lastName))
+})
 
 export default connect(mapSignup, mapDispatch)(Signup)
