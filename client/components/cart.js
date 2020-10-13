@@ -58,9 +58,11 @@ class Cart extends React.Component {
               </span>
             </li>
             <li className="total-row">
-              <button className="button" type="submit">
-                Checkout
-              </button>
+              <Link to="/checkout">
+                <button className="button" type="submit">
+                  Checkout
+                </button>
+              </Link>
             </li>
           </ul>
         </div>

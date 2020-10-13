@@ -5,6 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
+const UPDATE_USER = 'UPDATE_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -16,6 +17,7 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
+const updateUser = user => ({type: UPDATE_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -85,6 +87,20 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const updateUserThunk = (userId, updatedData) => async dispatch => {
+  try {
+    console.log('userId', userId, updatedData)
+    const {data: updatedUser} = await axios.patch(
+      `api/users/${userId}`,
+      updatedData
+    )
+    console.log('updated user', updatedUser)
+    dispatch(updateUser(updatedUser))
+  } catch (error) {
+    console.log('ERROR UPDATING USER>>>', error)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -94,6 +110,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case UPDATE_USER:
+      return action.user
     default:
       return state
   }

@@ -36,11 +36,14 @@ router.get('/', isAdmin, async (req, res, next) => {
 // PATCH api/users/:userId/
 router.patch('/:userId/', isSelfOrAdmin, async (req, res, next) => {
   try {
+    console.log('here?')
+    console.log('req body', req.body)
     const updatedUserInfo = await User.update(req.body, {
       returning: true,
       where: {id: req.params.userId}
     })
     const [numUpdated, [updatedPug]] = updatedUserInfo
+    console.log('updatedPug', updatedPug)
     res.json(updatedPug)
   } catch (error) {
     next(error)

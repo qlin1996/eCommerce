@@ -1,6 +1,7 @@
 /* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
+import {updateUserThunk} from '../store/user'
 
 /**
  * COMPONENT
@@ -25,21 +26,26 @@ class Checkout extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    if (
-      this.this.state.shippingStreetAddress &&
-      this.state.shippingCity &&
-      this.this.state.shippingState &&
-      this.isValidUSZip(this.state.shippingZipCode) &&
-      this.state.billingStreetAddress &&
-      this.state.billingCity &&
-      this.state.billingState &&
-      this.isValidUSZip(this.state.billingZipCode) &&
-      this.state.creditCardNumber &&
-      this.state.expirationDate &&
-      this.state.ccv
-    ) {
-      await this.props.checkout()
-    }
+    // if (
+    //   this.state.shippingStreetAddress &&
+    //   this.state.shippingCity &&
+    //   this.state.shippingState &&
+    //   this.isValidUSZip(this.state.shippingZipCode) &&
+    //   this.state.billingStreetAddress &&
+    //   this.state.billingCity &&
+    //   this.state.billingState &&
+    //   this.isValidUSZip(this.state.billingZipCode) &&
+    //   this.state.creditCardNumber &&
+    //   this.state.expirationDate &&
+    //   this.state.ccv
+    // ) {
+    await this.props.updateUserThunk(this.props.user.id, {
+      billingStreetAddress: this.state.billingStreetAddress,
+      billingCity: this.state.billingCity,
+      billingState: this.state.billingState,
+      billingZipCode: this.state.billingZipCode
+    })
+    // }
   }
 
   handleChange = event => {
@@ -233,8 +239,13 @@ class Checkout extends React.Component {
 /**
  * CONTAINER
  */
-const mapState = state => ({})
+const mapState = state => ({
+  user: state.user
+})
 
-const mapDispatch = dispatch => ({})
+const mapDispatch = dispatch => ({
+  updateUserThunk: (userId, updatedData) =>
+    dispatch(updateUserThunk(userId, updatedData))
+})
 
 export default connect(mapState, mapDispatch)(Checkout)
