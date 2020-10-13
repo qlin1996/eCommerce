@@ -36,8 +36,6 @@ router.get('/', isAdmin, async (req, res, next) => {
 // PATCH api/users/:userId/
 router.patch('/:userId/', isSelfOrAdmin, async (req, res, next) => {
   try {
-    console.log('here?')
-    console.log('req body', req.body)
     const updatedUserInfo = await User.update(req.body, {
       returning: true,
       where: {id: req.params.userId}
@@ -53,20 +51,13 @@ router.patch('/:userId/', isSelfOrAdmin, async (req, res, next) => {
 // GET api/users/:userId/cart
 router.get('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
   try {
-    let cart = await Cart.findOne({
+    let cart = await Cart.findOrCreate({
       where: {userId: req.params.userId, status: 'created'},
       include: [{model: Product}],
       order: [[{model: Product}, 'name', 'ASC']]
     })
-    if (!cart) {
-      await Cart.create({userId: req.params.userId})
-    }
-    cart = await Cart.findOne({
-      where: {userId: req.params.userId, status: 'created'},
-      include: [{model: Product}],
-      order: [[{model: Product}, 'name', 'ASC']]
-    })
-    res.json(cart)
+
+    res.json(cart[0])
   } catch (err) {
     next(err)
   }

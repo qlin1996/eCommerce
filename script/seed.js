@@ -10,16 +10,14 @@ async function seed() {
   console.log('db synced!')
 
   // users
-  const users = []
-  const admin = await User.create({
+  await User.create({
     firstName: 'Admin',
     lastName: 'Admin',
     email: 'admin@gmail.com',
     password: 'admin',
     isAdmin: 'yes'
   })
-  users.push(admin)
-  const user = await User.create({
+  await User.create({
     firstName: 'User',
     lastName: 'User',
     email: 'user@gmail.com',
@@ -30,11 +28,9 @@ async function seed() {
     billingState: 'New York',
     billingZipCode: 11327
   })
-  users.push(user)
 
   // products
-  const products = []
-  const necklace1 = await Product.create({
+  await Product.create({
     name: 'Trace Chain',
     description: 'Angle filed trace chain, white gold, 40 wire, 42 cm.',
     price: 78.99,
@@ -43,9 +39,8 @@ async function seed() {
     quantityInStock: 10,
     category: 'Necklace'
   })
-  products.push(necklace1)
   for (let i = 0; i < 25; i++) {
-    const necklace = await Product.create({
+    await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
       price: faker.finance.amount(50, 200, 2),
@@ -54,9 +49,8 @@ async function seed() {
       quantityInStock: 10,
       category: 'Necklace'
     })
-    products.push(necklace.dataValues)
   }
-  const bracelet1 = await Product.create({
+  await Product.create({
     name: 'Perlée bracelet',
     description: 'Perlée bracelet, yellow gold, medium model',
     price: 56.08,
@@ -65,9 +59,8 @@ async function seed() {
     quantityInStock: 10,
     category: 'Bracelet'
   })
-  products.push(bracelet1)
   for (let i = 0; i < 25; i++) {
-    const bracelet = await Product.create({
+    await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
       price: faker.finance.amount(50, 200, 2),
@@ -76,9 +69,8 @@ async function seed() {
       quantityInStock: 10,
       category: 'Bracelet'
     })
-    products.push(bracelet.dataValues)
   }
-  const ring1 = await Product.create({
+  await Product.create({
     name: 'Félicité ring',
     description:
       'Félicité ring, yellow gold, round diamonds; diamond quality DEF, IF to VVS.',
@@ -88,9 +80,8 @@ async function seed() {
     quantityInStock: 10,
     category: 'Ring'
   })
-  products.push(ring1)
   for (let i = 0; i < 25; i++) {
-    const ring = await Product.create({
+    await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
       price: faker.finance.amount(50, 200, 2),
@@ -99,9 +90,8 @@ async function seed() {
       quantityInStock: 10,
       category: 'Ring'
     })
-    products.push(ring.dataValues)
   }
-  const earring1 = await Product.create({
+  await Product.create({
     name: 'Rose earrings',
     description:
       'Rose earrings, small model, yellow gold, white mother-of-pearl, round diamonds; diamond quality DEF, IF to VVS.',
@@ -111,9 +101,8 @@ async function seed() {
     quantityInStock: 10,
     category: 'Earring'
   })
-  products.push(earring1)
   for (let i = 0; i < 25; i++) {
-    const earring = await Product.create({
+    await Product.create({
       name: faker.lorem.word(),
       description: faker.lorem.sentence(),
       price: faker.finance.amount(50, 200, 2),
@@ -122,7 +111,6 @@ async function seed() {
       quantityInStock: 10,
       category: 'Earring'
     })
-    products.push(earring.dataValues)
   }
 
   // cart

@@ -89,12 +89,10 @@ export const logout = () => async dispatch => {
 
 export const updateUserThunk = (userId, updatedData) => async dispatch => {
   try {
-    console.log('userId', userId, updatedData)
     const {data: updatedUser} = await axios.patch(
       `api/users/${userId}`,
       updatedData
     )
-    console.log('updated user', updatedUser)
     dispatch(updateUser(updatedUser))
   } catch (error) {
     console.log('ERROR UPDATING USER>>>', error)
