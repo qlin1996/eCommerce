@@ -24,11 +24,9 @@ const isSelfOrAdmin = (req, res, next) => {
 }
 
 // GET api/users
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      attributes: ['id', 'firstName', 'lastName', 'email']
-    })
+    const users = await User.findAll()
     res.json(users)
   } catch (err) {
     next(err)
@@ -36,13 +34,14 @@ router.get('/', async (req, res, next) => {
 })
 
 // PATCH api/users/:userId/
-router.patch('/:userId/', async (req, res, next) => {
+router.patch('/:userId/', isSelfOrAdmin, async (req, res, next) => {
   try {
-    const user = await User.update(req.body, {
+    const updatedUserInfo = await User.update(req.body, {
       returning: true,
       where: {id: req.params.userId}
     })
-    res.json(user)
+    const [numUpdated, [updatedPug]] = updatedUserInfo
+    res.json(updatedPug)
   } catch (error) {
     next(error)
   }
