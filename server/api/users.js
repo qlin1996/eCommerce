@@ -11,23 +11,27 @@ module.exports = router
 
 // gate keepers
 const isAdmin = (req, res, next) => {
-  if (req.user.isAdmin) return next()
-  res.redirect('/')
-}
-
-const isSelf = (req, res, next) => {
-  if (Number(req.params.userId) === req.user.id) {
+  if (req.user.isAdmin === 'yes') {
     return next()
   } else {
-    const err = new Error("Please don't hack")
+    const err = new Error("You don't have admin access.")
     err.status = 401
     return next(err)
   }
-  // res.redirect('/')
+}
+
+const isSelfOrAdmin = (req, res, next) => {
+  if (Number(req.params.userId) === req.user.id || req.user.isAdmin === 'yes') {
+    return next()
+  } else {
+    const err = new Error("Please don't hack us.")
+    err.status = 401
+    return next(err)
+  }
 }
 
 // GET api/users
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: ['id', 'firstName', 'lastName', 'email']
@@ -39,7 +43,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // GET api/users/:userId/cart
-router.get('/:userId/cart', isSelf, async (req, res, next) => {
+router.get('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
   try {
     let cart = await Cart.findOne({
       where: {userId: req.params.userId, status: 'created'},
@@ -61,7 +65,7 @@ router.get('/:userId/cart', isSelf, async (req, res, next) => {
 })
 
 // POST api/users/:userId/cart
-router.post('/:userId/cart', async (req, res, next) => {
+router.post('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
   try {
     await CartItem.create({
       cartId: req.body.cartId,
@@ -81,7 +85,7 @@ router.post('/:userId/cart', async (req, res, next) => {
 })
 
 // DELETE api/users/:userId/cart
-router.delete('/:userId/cart', async (req, res, next) => {
+router.delete('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
   try {
     await CartItem.destroy({
       where: {cartId: req.body.cartId, productId: req.body.productId}
@@ -98,7 +102,7 @@ router.delete('/:userId/cart', async (req, res, next) => {
 })
 
 // PATCH api/users/:userId/cart
-router.patch('/:userId/cart', async (req, res, next) => {
+router.patch('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
   try {
     await CartItem.update(
       {cartItemQuantity: req.body.cartItemQuantity},
