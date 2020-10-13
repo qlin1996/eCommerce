@@ -447,3 +447,14 @@ input {
 .checkout-form button {
   margin-top: 3em;
 }
+
+@media screen and (max-width: 700px) {
+  .checkout-row-2,
+  .checkout-row-3 {
+    flex-direction: column;
+  }
+  .checkout-row-2 div,
+  .checkout-row-3 div {
+    width: 100%;
+  }
+}
