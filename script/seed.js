@@ -2,35 +2,12 @@
 'use strict'
 
 const db = require('../server/db')
-const {
-  User,
-  Product,
-  Cart,
-  CartItem,
-  BillingAddress,
-  ShippingAddress
-} = require('../server/db/models')
+const {User, Product, Cart, CartItem} = require('../server/db/models')
 const faker = require('faker')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
-
-  // billing and shipping Addresses
-  await Promise.all([
-    BillingAddress.create({
-      billingStreetAddress: '3847 Prince Street',
-      billingCity: 'New York',
-      billingState: 'New York',
-      billingZipCode: 11327
-    }),
-    ShippingAddress.create({
-      shippingStreetAddress: '3847 Prince Street',
-      shippingCity: 'New York',
-      shippingState: 'New York',
-      shippingZipCode: 11327
-    })
-  ])
 
   // users
   const users = []
@@ -48,7 +25,10 @@ async function seed() {
     email: 'user@gmail.com',
     password: 'user',
     isAdmin: 'no',
-    billingAddressId: 1
+    billingStreetAddress: '3847 Prince Street',
+    billingCity: 'New York',
+    billingState: 'New York',
+    billingZipCode: 11327
   })
   users.push(user)
 
@@ -153,7 +133,10 @@ async function seed() {
     cartTax: 9.95,
     cartTotal: 137.06,
     dateSubmitted: new Date(),
-    shippingAddressId: 1
+    shippingStreetAddress: '3847 Prince Street',
+    shippingCity: 'New York',
+    shippingState: 'New York',
+    shippingZipCode: 11327
   })
 
   // cartItems

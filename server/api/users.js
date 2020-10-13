@@ -24,7 +24,7 @@ const isSelfOrAdmin = (req, res, next) => {
 }
 
 // GET api/users
-router.get('/', isAdmin, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: ['id', 'firstName', 'lastName', 'email']
@@ -32,6 +32,19 @@ router.get('/', isAdmin, async (req, res, next) => {
     res.json(users)
   } catch (err) {
     next(err)
+  }
+})
+
+// PATCH api/users/:userId/
+router.patch('/:userId/', async (req, res, next) => {
+  try {
+    const user = await User.update(req.body, {
+      returning: true,
+      where: {id: req.params.userId}
+    })
+    res.json(user)
+  } catch (error) {
+    next(error)
   }
 })
 
