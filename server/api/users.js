@@ -1,12 +1,5 @@
 const router = require('express').Router()
-const {
-  User,
-  Cart,
-  Product,
-  CartItem,
-  BillingAddress,
-  StreetAddress
-} = require('../db/models')
+const {User, Cart, Product, CartItem} = require('../db/models')
 module.exports = router
 
 // gate keepers

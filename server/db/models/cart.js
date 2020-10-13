@@ -20,6 +20,18 @@ const Cart = db.define('cart', {
   },
   dateSubmitted: {
     type: Sequelize.DATE
+  },
+  shippingStreetAddress: {
+    type: Sequelize.STRING
+  },
+  shippingCity: {
+    type: Sequelize.STRING
+  },
+  shippingState: {
+    type: Sequelize.STRING
+  },
+  shippingZipCode: {
+    type: Sequelize.INTEGER
   }
 })
 

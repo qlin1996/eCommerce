@@ -44,6 +44,18 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  billingStreetAddress: {
+    type: Sequelize.STRING
+  },
+  billingCity: {
+    type: Sequelize.STRING
+  },
+  billingState: {
+    type: Sequelize.STRING
+  },
+  billingZipCode: {
+    type: Sequelize.INTEGER
   }
 })
 
