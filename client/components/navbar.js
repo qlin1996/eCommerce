@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {NavLink} from 'react-router-dom'
 
 const Navbar = ({handleClick, isLoggedIn}) => {
   const [navClicked, setNavClicked] = useState(false)
@@ -19,12 +19,20 @@ const Navbar = ({handleClick, isLoggedIn}) => {
           <React.Fragment>
             {/* After you login */}
             <div className={navClicked ? 'flex-column' : null}>
-              <Link to="/home" onClick={() => setNavClicked(false)}>
+              <NavLink
+                activeClassName="selected"
+                to="/home"
+                onClick={() => setNavClicked(false)}
+              >
                 Home
-              </Link>
-              <Link to="/products" onClick={() => setNavClicked(false)}>
+              </NavLink>
+              <NavLink
+                activeClassName="selected"
+                to="/products"
+                onClick={() => setNavClicked(false)}
+              >
                 All Products
-              </Link>
+              </NavLink>
             </div>
             <div className={navClicked ? 'flex-column' : null}>
               <a
@@ -37,13 +45,21 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 Logout
               </a>
               {navClicked ? (
-                <Link to="/cart" onClick={() => setNavClicked(false)}>
+                <NavLink
+                  activeClassName="selected"
+                  to="/cart"
+                  onClick={() => setNavClicked(false)}
+                >
                   Cart
-                </Link>
+                </NavLink>
               ) : (
-                <Link to="/cart" onClick={() => setNavClicked(false)}>
+                <NavLink
+                  activeClassName="selected"
+                  to="/cart"
+                  onClick={() => setNavClicked(false)}
+                >
                   <i className="fas fa-shopping-cart" />
-                </Link>
+                </NavLink>
               )}
             </div>
           </React.Fragment>
@@ -51,27 +67,47 @@ const Navbar = ({handleClick, isLoggedIn}) => {
           <React.Fragment>
             {/* Before you login */}
             <div className={navClicked ? 'flex-column' : null}>
-              <Link to="/products" onClick={() => setNavClicked(false)}>
+              <NavLink
+                activeClassName="selected"
+                to="/products"
+                onClick={() => setNavClicked(false)}
+              >
                 All Products
-              </Link>
+              </NavLink>
             </div>
             {navClicked ? (
               <React.Fragment>
-                <Link to="/login" onClick={() => setNavClicked(false)}>
+                <NavLink
+                  activeClassName="selected"
+                  to="/login"
+                  onClick={() => setNavClicked(false)}
+                >
                   Login
-                </Link>
-                <Link to="/cart" onClick={() => setNavClicked(false)}>
+                </NavLink>
+                <NavLink
+                  activeClassName="selected"
+                  to="/cart"
+                  onClick={() => setNavClicked(false)}
+                >
                   Cart
-                </Link>
+                </NavLink>
               </React.Fragment>
             ) : (
               <div>
-                <Link to="/login" onClick={() => setNavClicked(false)}>
+                <NavLink
+                  activeClassName="selected"
+                  to="/login"
+                  onClick={() => setNavClicked(false)}
+                >
                   <i className="fas fa-user-alt" />
-                </Link>
-                <Link to="/cart" onClick={() => setNavClicked(false)}>
+                </NavLink>
+                <NavLink
+                  activeClassName="selected"
+                  to="/cart"
+                  onClick={() => setNavClicked(false)}
+                >
                   <i className="fas fa-shopping-cart" />
-                </Link>
+                </NavLink>
               </div>
             )}
           </React.Fragment>

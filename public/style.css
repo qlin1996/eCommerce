@@ -91,6 +91,10 @@ select {
   display: none;
 }
 
+.selected {
+  font-weight: bold;
+}
+
 @media screen and (max-width: 480px) {
   .fa-bars,
   .fa-times {
