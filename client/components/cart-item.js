@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {updateQtyInCartThunk, deleteFromCartThunk} from '../store/cart'
+import {updateCartItemThunk, deleteCartItemThunk} from '../store/cart'
 
 /**
  * COMPONENT
@@ -16,7 +16,7 @@ class CartItem extends React.Component {
 
   handleDelete = async event => {
     event.preventDefault()
-    await this.props.deleteFromCartThunk(
+    await this.props.deleteCartItemThunk(
       this.props.user.id,
       this.props.cart.id,
       this.props.product.id
@@ -25,28 +25,26 @@ class CartItem extends React.Component {
 
   minus = async () => {
     if (this.props.product.cartItem.cartItemQuantity === 1) {
-      await this.props.deleteFromCartThunk(
+      await this.props.deleteCartItemThunk(
         this.props.user.id,
         this.props.cart.id,
         this.props.product.id
       )
     } else {
-      await this.props.updateQtyInCartThunk(
-        this.props.user.id,
-        this.props.cart.id,
-        this.props.product.id,
-        this.props.product.cartItem.cartItemQuantity - 1
-      )
+      await this.props.updateCartItemThunk(this.props.user.id, {
+        cartId: this.props.cart.id,
+        productId: this.props.product.id,
+        cartItemQuantity: this.props.product.cartItem.cartItemQuantity - 1
+      })
     }
   }
 
   plus = async () => {
-    await this.props.updateQtyInCartThunk(
-      this.props.user.id,
-      this.props.cart.id,
-      this.props.product.id,
-      this.props.product.cartItem.cartItemQuantity + 1
-    )
+    await this.props.updateCartItemThunk(this.props.user.id, {
+      cartId: this.props.cart.id,
+      productId: this.props.product.id,
+      cartItemQuantity: this.props.product.cartItem.cartItemQuantity + 1
+    })
   }
 
   render() {
@@ -96,10 +94,10 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  updateQtyInCartThunk: (userId, cartId, productId, cartItemQuantity) =>
-    dispatch(updateQtyInCartThunk(userId, cartId, productId, cartItemQuantity)),
-  deleteFromCartThunk: (userId, cartId, productId) =>
-    dispatch(deleteFromCartThunk(userId, cartId, productId))
+  updateCartItemThunk: (userId, cartInfo) =>
+    dispatch(updateCartItemThunk(userId, cartInfo)),
+  deleteCartItemThunk: (userId, cartId, productId) =>
+    dispatch(deleteCartItemThunk(userId, cartId, productId))
 })
 
 export default connect(mapState, mapDispatch)(CartItem)

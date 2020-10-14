@@ -2,6 +2,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {updateUserThunk} from '../store/user'
+import {updateCartThunk} from '../store/cart'
 
 /**
  * COMPONENT
@@ -44,6 +45,12 @@ class Checkout extends React.Component {
       billingCity: this.state.billingCity,
       billingState: this.state.billingState,
       billingZipCode: this.state.billingZipCode
+    })
+    await this.props.updateCartThunk(this.props.user.id, {
+      shippingStreetAddress: this.state.shippingStreetAddress,
+      shippingCity: this.state.shippingCity,
+      shippingState: this.state.shippingState,
+      shippingZipCode: this.state.shippingZipCode
     })
     // }
   }
@@ -245,7 +252,9 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   updateUserThunk: (userId, updatedData) =>
-    dispatch(updateUserThunk(userId, updatedData))
+    dispatch(updateUserThunk(userId, updatedData)),
+  updateCartThunk: (userId, cartInfo) =>
+    dispatch(updateCartThunk(userId, cartInfo))
 })
 
 export default connect(mapState, mapDispatch)(Checkout)

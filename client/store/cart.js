@@ -26,10 +26,10 @@ export const fetchCartThunk = userId => {
   }
 }
 
-export const addToCartThunk = (userId, cartId, productId, cartItemPrice) => {
+export const addCartItemThunk = (userId, cartId, productId, cartItemPrice) => {
   return async dispatch => {
     try {
-      const {data: cart} = await axios.post(`/api/users/${userId}/cart`, {
+      const {data: cart} = await axios.post(`/api/users/${userId}/cartItem`, {
         cartId,
         productId,
         cartItemPrice
@@ -41,10 +41,10 @@ export const addToCartThunk = (userId, cartId, productId, cartItemPrice) => {
   }
 }
 
-export const deleteFromCartThunk = (userId, cartId, productId) => {
+export const deleteCartItemThunk = (userId, cartId, productId) => {
   return async dispatch => {
     try {
-      const {data: cart} = await axios.delete(`/api/users/${userId}/cart`, {
+      const {data: cart} = await axios.delete(`/api/users/${userId}/cartItem`, {
         data: {cartId, productId}
       })
       dispatch(updateCart(cart))
@@ -54,22 +54,30 @@ export const deleteFromCartThunk = (userId, cartId, productId) => {
   }
 }
 
-export const updateQtyInCartThunk = (
-  userId,
-  cartId,
-  productId,
-  cartItemQuantity
-) => {
+export const updateCartItemThunk = (userId, cartInfo) => {
   return async dispatch => {
     try {
-      const {data: cart} = await axios.patch(`/api/users/${userId}/cart`, {
-        cartId,
-        productId,
-        cartItemQuantity
-      })
+      const {data: cart} = await axios.patch(
+        `/api/users/${userId}/cartItem`,
+        cartInfo
+      )
       dispatch(updateCart(cart))
     } catch (error) {
-      console.log('ERROR UPDATING QTY IN CART>>>', error)
+      console.log('ERROR UPDATING CART ITEM>>>', error)
+    }
+  }
+}
+
+export const updateCartThunk = (userId, cartInfo) => {
+  return async dispatch => {
+    try {
+      const {data: cart} = await axios.patch(
+        `/api/users/${userId}/cart`,
+        cartInfo
+      )
+      dispatch(updateCart(cart))
+    } catch (error) {
+      console.log('ERROR UPDATING CART>>>', error)
     }
   }
 }

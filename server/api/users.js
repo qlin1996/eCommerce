@@ -37,11 +37,10 @@ router.get('/', isAdmin, async (req, res, next) => {
 router.patch('/:userId/', isSelfOrAdmin, async (req, res, next) => {
   try {
     const updatedUserInfo = await User.update(req.body, {
-      returning: true,
-      where: {id: req.params.userId}
+      where: {id: req.params.userId},
+      returning: true
     })
     const [numUpdated, [updatedPug]] = updatedUserInfo
-    console.log('updatedPug', updatedPug)
     res.json(updatedPug)
   } catch (error) {
     next(error)
@@ -49,22 +48,35 @@ router.patch('/:userId/', isSelfOrAdmin, async (req, res, next) => {
 })
 
 // GET api/users/:userId/cart
-router.get('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
+router.get('/:userId/cart', async (req, res, next) => {
   try {
     let cart = await Cart.findOrCreate({
       where: {userId: req.params.userId, status: 'created'},
       include: [{model: Product}],
       order: [[{model: Product}, 'name', 'ASC']]
     })
-
     res.json(cart[0])
   } catch (err) {
     next(err)
   }
 })
 
-// POST api/users/:userId/cart
-router.post('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
+// PATCH api/users/:userId/cart
+router.patch('/:userId/cart', async (req, res, next) => {
+  try {
+    const updatedCartInfo = await Cart.update(req.body, {
+      where: {userId: req.params.userId},
+      returning: true
+    })
+    const [numUpdated, [updatedCart]] = updatedCartInfo
+    res.json(updatedCart)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// POST api/users/:userId/cartItem
+router.post('/:userId/cartItem', isSelfOrAdmin, async (req, res, next) => {
   try {
     await CartItem.create({
       cartId: req.body.cartId,
@@ -83,8 +95,8 @@ router.post('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
   }
 })
 
-// DELETE api/users/:userId/cart
-router.delete('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
+// DELETE api/users/:userId/cartItem
+router.delete('/:userId/cartItem', isSelfOrAdmin, async (req, res, next) => {
   try {
     await CartItem.destroy({
       where: {cartId: req.body.cartId, productId: req.body.productId}
@@ -100,18 +112,16 @@ router.delete('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
   }
 })
 
-// PATCH api/users/:userId/cart
-router.patch('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
+// PATCH api/users/:userId/cartItem
+router.patch('/:userId/cartItem', async (req, res, next) => {
   try {
-    await CartItem.update(
-      {cartItemQuantity: req.body.cartItemQuantity},
-      {
-        where: {
-          cartId: req.body.cartId,
-          productId: req.body.productId
-        }
-      }
-    )
+    await CartItem.update(req.body, {
+      where: {
+        cartId: req.body.cartId,
+        productId: req.body.productId
+      },
+      returning: true
+    })
     const cart = await Cart.findOne({
       where: {userId: req.params.userId, status: 'created'},
       include: [{model: Product}],

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProductThunk} from '../store/product'
-import {fetchCartThunk, addToCartThunk} from '../store/cart'
+import {fetchCartThunk, addCartItemThunk} from '../store/cart'
 import {me} from '../store/user'
 
 /**
@@ -24,7 +24,7 @@ class Product extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.addToCartThunk(
+    this.props.addCartItemThunk(
       this.props.user.id,
       this.props.cart.id,
       this.props.product.id,
@@ -69,8 +69,8 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   fetchProductThunk: productId => dispatch(fetchProductThunk(productId)),
-  addToCartThunk: (userId, cartId, productId, cartItemPrice) =>
-    dispatch(addToCartThunk(userId, cartId, productId, cartItemPrice)),
+  addCartItemThunk: (userId, cartId, productId, cartItemPrice) =>
+    dispatch(addCartItemThunk(userId, cartId, productId, cartItemPrice)),
   me: () => dispatch(me()),
   fetchCartThunk: userId => dispatch(fetchCartThunk(userId))
 })
