@@ -1,6 +1,7 @@
 /* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {updateUserThunk} from '../store/user'
 import {updateCartThunk} from '../store/cart'
 
@@ -27,32 +28,32 @@ class Checkout extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    // if (
-    //   this.state.shippingStreetAddress &&
-    //   this.state.shippingCity &&
-    //   this.state.shippingState &&
-    //   this.isValidUSZip(this.state.shippingZipCode) &&
-    //   this.state.billingStreetAddress &&
-    //   this.state.billingCity &&
-    //   this.state.billingState &&
-    //   this.isValidUSZip(this.state.billingZipCode) &&
-    //   this.state.creditCardNumber &&
-    //   this.state.expirationDate &&
-    //   this.state.ccv
-    // ) {
-    await this.props.updateUserThunk(this.props.user.id, {
-      billingStreetAddress: this.state.billingStreetAddress,
-      billingCity: this.state.billingCity,
-      billingState: this.state.billingState,
-      billingZipCode: this.state.billingZipCode
-    })
-    await this.props.updateCartThunk(this.props.user.id, {
-      shippingStreetAddress: this.state.shippingStreetAddress,
-      shippingCity: this.state.shippingCity,
-      shippingState: this.state.shippingState,
-      shippingZipCode: this.state.shippingZipCode
-    })
-    // }
+    if (
+      this.state.shippingStreetAddress &&
+      this.state.shippingCity &&
+      this.state.shippingState &&
+      this.isValidUSZip(this.state.shippingZipCode) &&
+      this.state.billingStreetAddress &&
+      this.state.billingCity &&
+      this.state.billingState &&
+      this.isValidUSZip(this.state.billingZipCode) &&
+      this.state.creditCardNumber &&
+      this.state.expirationDate &&
+      this.state.ccv
+    ) {
+      await this.props.updateUserThunk(this.props.user.id, {
+        billingStreetAddress: this.state.billingStreetAddress,
+        billingCity: this.state.billingCity,
+        billingState: this.state.billingState,
+        billingZipCode: this.state.billingZipCode
+      })
+      await this.props.updateCartThunk(this.props.user.id, {
+        shippingStreetAddress: this.state.shippingStreetAddress,
+        shippingCity: this.state.shippingCity,
+        shippingState: this.state.shippingState,
+        shippingZipCode: this.state.shippingZipCode
+      })
+    }
   }
 
   handleChange = event => {
@@ -233,9 +234,11 @@ class Checkout extends React.Component {
           </div>
 
           <div>
-            <button className="button" type="submit">
-              Review Order
-            </button>
+            <Link to="/review-order">
+              <button className="button" type="submit">
+                Review Order
+              </button>
+            </Link>
           </div>
         </form>
       </div>
