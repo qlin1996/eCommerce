@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -34,7 +35,26 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 All Products
               </NavLink>
             </div>
+
             <div className={navClicked ? 'flex-column' : null}>
+              {navClicked ? (
+                <NavLink
+                  activeClassName="selected"
+                  to="/search-products"
+                  onClick={() => setNavClicked(false)}
+                >
+                  Search
+                </NavLink>
+              ) : (
+                <NavLink
+                  activeClassName="selected"
+                  to="/search-products"
+                  onClick={() => setNavClicked(false)}
+                >
+                  <i className="fas fa-search" />{' '}
+                </NavLink>
+              )}
+
               <a
                 href="#"
                 onClick={() => {
@@ -44,6 +64,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
               >
                 Logout
               </a>
+
               {navClicked ? (
                 <NavLink
                   activeClassName="selected"
@@ -86,6 +107,13 @@ const Navbar = ({handleClick, isLoggedIn}) => {
               <React.Fragment>
                 <NavLink
                   activeClassName="selected"
+                  to="/search-products"
+                  onClick={() => setNavClicked(false)}
+                >
+                  Search
+                </NavLink>
+                <NavLink
+                  activeClassName="selected"
                   to="/login"
                   onClick={() => setNavClicked(false)}
                 >
@@ -103,11 +131,19 @@ const Navbar = ({handleClick, isLoggedIn}) => {
               <div>
                 <NavLink
                   activeClassName="selected"
+                  to="/search-products"
+                  onClick={() => setNavClicked(false)}
+                >
+                  <i className="fas fa-search" />
+                </NavLink>
+                <NavLink
+                  activeClassName="selected"
                   to="/login"
                   onClick={() => setNavClicked(false)}
                 >
                   <i className="fas fa-user-alt" />
                 </NavLink>
+
                 <NavLink
                   activeClassName="selected"
                   to="/cart"

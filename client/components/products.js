@@ -161,7 +161,9 @@ class Products extends React.Component {
         <div className="add-product">
           {this.props.user.isAdmin === 'yes' && (
             <Link to="/add-product">
-              <button type="button">Add Product</button>
+              <button className="continue" type="button">
+                Add Product
+              </button>
             </Link>
           )}
         </div>

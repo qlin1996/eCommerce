@@ -14,7 +14,8 @@ import {
   Confirmation,
   Home,
   AddProduct,
-  EditProduct
+  EditProduct,
+  SearchProducts
 } from './components'
 import {me} from './store'
 
@@ -35,6 +36,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={Products} />
+        <Route path="/search-products" component={SearchProducts} />
         <Route exact path="/products/:productId" component={Product} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} history={history} />
@@ -60,7 +62,7 @@ class Routes extends Component {
             />
           </Switch>
         )}
-        {/* Displays our Login component as a fallback */}
+        {/* Displays our Home component as a fallback */}
         <Route component={Home} />
       </Switch>
     )

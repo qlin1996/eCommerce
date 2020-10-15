@@ -536,3 +536,10 @@ input {
   padding-bottom: 1em;
   margin-bottom: 3em;
 }
+
+/* ALL PRODUCTS */
+.search {
+  display: flex;
+  justify-content: center;
+  margin: 2em auto;
+}
