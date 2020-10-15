@@ -180,6 +180,10 @@ select {
 }
 
 /* ALL PRODUCTS */
+.add-product {
+  margin: 0 0 2em 2em;
+}
+
 .filter-sort {
   display: flex;
   padding: 0.5em 1em 1em 1em;

@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProductsThunk} from '../store/products'
 import {Link} from 'react-router-dom'
+import {me} from '../store/user'
 
 class Products extends React.Component {
   constructor() {
@@ -15,6 +16,7 @@ class Products extends React.Component {
     }
   }
   async componentDidMount() {
+    await this.props.me()
     await this.props.fetchProductsThunk()
     this.setState({productsSelected: this.props.products})
   }
@@ -156,6 +158,13 @@ class Products extends React.Component {
             </select>
           </div>
         </div>
+        <div className="add-product">
+          {this.props.user.isAdmin === 'yes' && (
+            <Link to="add-product">
+              <button type="button">Add Product</button>
+            </Link>
+          )}
+        </div>
         <section className="all-products-grid">
           {currentProductsOnPage.map(product => (
             <div key={product.id}>
@@ -206,11 +215,13 @@ class Products extends React.Component {
 }
 
 const mapState = state => ({
-  products: state.products
+  products: state.products,
+  user: state.user
 })
 
 const mapDispatch = dispatch => ({
-  fetchProductsThunk: () => dispatch(fetchProductsThunk())
+  fetchProductsThunk: () => dispatch(fetchProductsThunk()),
+  me: () => dispatch(me())
 })
 
 export default connect(mapState, mapDispatch)(Products)
