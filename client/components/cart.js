@@ -1,23 +1,95 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchCartThunk} from '../store/cart'
+import {
+  fetchCartThunk,
+  updateCartThunk,
+  updateCartItemThunk,
+  deleteCartItemThunk
+} from '../store/cart'
 import {me} from '../store/user'
 import CartItem from './cart-item'
 
 class Cart extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      cartSubTotal: 0,
+      cartShipping: 5,
+      cartTax: 0,
+      cartTotal: 0
+    }
+    this.handleDelete = this.handleDelete.bind(this)
+    this.minus = this.minus.bind(this)
+    this.plus = this.plus.bind(this)
+  }
+
   async componentDidMount() {
     await this.props.me()
     await this.props.fetchCartThunk(this.props.user.id)
+    await this.calculate()
+  }
+
+  calculate = () => {
+    const taxRate = 0.08875
+    const products = this.props.cart.products
+    const cartSubTotal = products
+      .map(product => product.price * product.cartItem.cartItemQuantity)
+      .reduce((accum, currentVal) => accum + currentVal, 0)
+    const cartTax = cartSubTotal * taxRate
+    const cartTotal = cartSubTotal * (1 + taxRate) + this.state.cartShipping
+
+    this.setState({
+      cartSubTotal,
+      cartTax,
+      cartTotal
+    })
+  }
+
+  async handleDelete(event, productId) {
+    console.log('delete')
+    event.preventDefault()
+    await this.props.deleteCartItemThunk(
+      this.props.user.id,
+      this.props.cart.id,
+      productId
+    )
+    await this.calculate()
+  }
+
+  async minus(productId, cartItemQuantity) {
+    if (cartItemQuantity === 0) {
+      await this.props.deleteCartItemThunk(
+        this.props.user.id,
+        this.props.cart.id,
+        productId
+      )
+      this.calculate()
+    } else {
+      await this.props.updateCartItemThunk(this.props.user.id, {
+        cartId: this.props.cart.id,
+        productId,
+        cartItemQuantity
+      })
+      this.calculate()
+    }
+  }
+
+  async plus(productId, cartItemQuantity) {
+    await this.props.updateCartItemThunk(this.props.user.id, {
+      cartId: this.props.cart.id,
+      productId,
+      cartItemQuantity
+    })
+    this.calculate()
+  }
+
+  handleSubmit = async () => {
+    await this.props.updateCartThunk(this.props.user.id, this.state)
   }
 
   render() {
     const products = this.props.cart.products || []
-    const subTotal = products
-      .map(product => product.price * product.cartItem.cartItemQuantity)
-      .reduce((accum, currentVal) => accum + currentVal, 0)
-    const shipping = 5.0
-    const taxRate = 0.08875
 
     return (
       <div className="wrap">
@@ -31,32 +103,43 @@ class Cart extends React.Component {
         </div>
         {products.map(product => (
           <div key={product.id} className="item">
-            <CartItem product={product} />
+            <CartItem
+              product={product}
+              minus={this.minus}
+              plus={this.plus}
+              handleDelete={this.handleDelete}
+            />
           </div>
         ))}
         <div className="totals">
           <ul>
             <li className="total-row">
               <span className="label">subtotal</span>
-              <span className="value">${subTotal.toFixed(2)}</span>
-            </li>
-            <li className="total-row">
-              <span className="label">shipping</span>
-              <span className="value">${shipping.toFixed(2)}</span>
-            </li>
-            <li className="total-row">
-              <span className="label">tax</span>
-              <span className="value">${(subTotal * taxRate).toFixed(2)}</span>
-            </li>
-            <li className="total-row final">
-              <span className="label">total</span>
               <span className="value">
-                ${(subTotal * (1 + taxRate) + shipping).toFixed(2)}
+                ${this.state.cartSubTotal.toFixed(2)}
               </span>
             </li>
             <li className="total-row">
+              <span className="label">shipping</span>
+              <span className="value">
+                ${this.state.cartShipping.toFixed(2)}
+              </span>
+            </li>
+            <li className="total-row">
+              <span className="label">tax</span>
+              <span className="value">${this.state.cartTax.toFixed(2)}</span>
+            </li>
+            <li className="total-row final">
+              <span className="label">total</span>
+              <span className="value">${this.state.cartTotal.toFixed(2)}</span>
+            </li>
+            <li className="total-row">
               <Link to="/checkout">
-                <button className="button" type="submit">
+                <button
+                  className="button"
+                  type="submit"
+                  onClick={this.handleSubmit}
+                >
                   Checkout
                 </button>
               </Link>
@@ -75,7 +158,13 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   me: () => dispatch(me()),
-  fetchCartThunk: userId => dispatch(fetchCartThunk(userId))
+  fetchCartThunk: userId => dispatch(fetchCartThunk(userId)),
+  updateCartThunk: (userId, cartInfo) =>
+    dispatch(updateCartThunk(userId, cartInfo)),
+  updateCartItemThunk: (userId, cartInfo) =>
+    dispatch(updateCartItemThunk(userId, cartInfo)),
+  deleteCartItemThunk: (userId, cartId, productId) =>
+    dispatch(deleteCartItemThunk(userId, cartId, productId))
 })
 
 export default connect(mapState, mapDispatch)(Cart)

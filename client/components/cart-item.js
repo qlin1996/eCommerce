@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {updateCartItemThunk, deleteCartItemThunk} from '../store/cart'
 
 class CartItem extends React.Component {
   capitalizeFirstLetter = str => {
@@ -9,39 +8,6 @@ class CartItem extends React.Component {
       arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1)
     }
     return arr.join(' ')
-  }
-
-  handleDelete = async event => {
-    event.preventDefault()
-    await this.props.deleteCartItemThunk(
-      this.props.user.id,
-      this.props.cart.id,
-      this.props.product.id
-    )
-  }
-
-  minus = async () => {
-    if (this.props.product.cartItem.cartItemQuantity === 1) {
-      await this.props.deleteCartItemThunk(
-        this.props.user.id,
-        this.props.cart.id,
-        this.props.product.id
-      )
-    } else {
-      await this.props.updateCartItemThunk(this.props.user.id, {
-        cartId: this.props.cart.id,
-        productId: this.props.product.id,
-        cartItemQuantity: this.props.product.cartItem.cartItemQuantity - 1
-      })
-    }
-  }
-
-  plus = async () => {
-    await this.props.updateCartItemThunk(this.props.user.id, {
-      cartId: this.props.cart.id,
-      productId: this.props.product.id,
-      cartItemQuantity: this.props.product.cartItem.cartItemQuantity + 1
-    })
   }
 
   render() {
@@ -59,9 +25,25 @@ class CartItem extends React.Component {
                   <small className="error">Not enough in stock</small>
                 ) : null}
                 <div className="flex">
-                  <i className="far fa-minus-square" onClick={this.minus} />
+                  <i
+                    className="far fa-minus-square"
+                    onClick={() =>
+                      this.props.minus(
+                        this.props.product.id,
+                        this.props.product.cartItem.cartItemQuantity - 1
+                      )
+                    }
+                  />
                   <p>{this.props.product.cartItem.cartItemQuantity}</p>
-                  <i className="far fa-plus-square" onClick={this.plus} />
+                  <i
+                    className="far fa-plus-square"
+                    onClick={() =>
+                      this.props.plus(
+                        this.props.product.id,
+                        this.props.product.cartItem.cartItemQuantity + 1
+                      )
+                    }
+                  />
                 </div>
                 <p className="price"> x ${product.price}</p>
               </div>
@@ -74,7 +56,9 @@ class CartItem extends React.Component {
           </h3>
           <i
             className="far fa-times-circle"
-            onClick={event => this.handleDelete(event)}
+            onClick={event =>
+              this.props.handleDelete(event, this.props.product.id)
+            }
           />
         </div>
       </React.Fragment>
@@ -87,11 +71,4 @@ const mapState = state => ({
   cart: state.cart
 })
 
-const mapDispatch = dispatch => ({
-  updateCartItemThunk: (userId, cartInfo) =>
-    dispatch(updateCartItemThunk(userId, cartInfo)),
-  deleteCartItemThunk: (userId, cartId, productId) =>
-    dispatch(deleteCartItemThunk(userId, cartId, productId))
-})
-
-export default connect(mapState, mapDispatch)(CartItem)
+export default connect(mapState)(CartItem)

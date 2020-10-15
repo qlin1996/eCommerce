@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {me} from '../store/user'
-import {fetchCartThunk} from '../store/cart'
+import {fetchCartThunk, updateCartThunk} from '../store/cart'
 
 class ReviewOrder extends React.Component {
   async componentDidMount() {
@@ -16,6 +16,10 @@ class ReviewOrder extends React.Component {
       arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].substring(1)
     }
     return arr.join(' ')
+  }
+
+  handleSubmit = async () => {
+    await this.props.updateCartThunk(this.props.user.id)
   }
 
   render() {
@@ -128,7 +132,9 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   me: () => dispatch(me()),
-  fetchCartThunk: userId => dispatch(fetchCartThunk(userId))
+  fetchCartThunk: userId => dispatch(fetchCartThunk(userId)),
+  updateCartThunk: (userId, cartInfo) =>
+    dispatch(updateCartThunk(userId, cartInfo))
 })
 
 export default connect(mapState, mapDispatch)(ReviewOrder)
