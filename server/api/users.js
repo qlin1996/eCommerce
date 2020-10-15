@@ -61,6 +61,19 @@ router.get('/:userId/cart', async (req, res, next) => {
   }
 })
 
+// POST api/users/:userId/cart
+router.post('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
+  try {
+    const cart = await Cart.create({
+      userId: req.params.userId,
+      status: 'created'
+    })
+    res.json(cart)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // PATCH api/users/:userId/cart
 router.patch('/:userId/cart', async (req, res, next) => {
   try {

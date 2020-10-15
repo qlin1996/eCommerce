@@ -30,7 +30,8 @@ class CartItem extends React.Component {
                     onClick={() =>
                       this.props.minus(
                         this.props.product.id,
-                        this.props.product.cartItem.cartItemQuantity - 1
+                        this.props.product.cartItem.cartItemQuantity - 1,
+                        this.props.product.price
                       )
                     }
                   />
@@ -40,7 +41,8 @@ class CartItem extends React.Component {
                     onClick={() =>
                       this.props.plus(
                         this.props.product.id,
-                        this.props.product.cartItem.cartItemQuantity + 1
+                        this.props.product.cartItem.cartItemQuantity + 1,
+                        this.props.product.price
                       )
                     }
                   />

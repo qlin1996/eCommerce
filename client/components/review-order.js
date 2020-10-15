@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {me} from '../store/user'
-import {fetchCartThunk, updateCartThunk} from '../store/cart'
+import {fetchCartThunk, updateCartThunk, createCartThunk} from '../store/cart'
 
 class ReviewOrder extends React.Component {
   async componentDidMount() {
@@ -23,6 +23,7 @@ class ReviewOrder extends React.Component {
       status: 'processing',
       dateSubmitted: new Date()
     })
+    await this.props.createCartThunk(this.props.user.id)
   }
 
   render() {
@@ -140,7 +141,8 @@ const mapDispatch = dispatch => ({
   me: () => dispatch(me()),
   fetchCartThunk: userId => dispatch(fetchCartThunk(userId)),
   updateCartThunk: (userId, cartInfo) =>
-    dispatch(updateCartThunk(userId, cartInfo))
+    dispatch(updateCartThunk(userId, cartInfo)),
+  createCartThunk: userId => dispatch(createCartThunk(userId))
 })
 
 export default connect(mapState, mapDispatch)(ReviewOrder)

@@ -52,7 +52,7 @@ export const signup = (
 
   try {
     dispatch(getUser(res.data))
-    history.push('/')
+    history.push('/user-home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }

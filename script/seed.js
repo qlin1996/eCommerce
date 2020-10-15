@@ -116,10 +116,10 @@ async function seed() {
   // cart
   await Cart.create({
     userId: 2,
-    cartSubTotal: 112.16,
+    cartSubTotal: 157.98,
     cartShipping: 5.0,
-    cartTax: 9.95,
-    cartTotal: 137.06,
+    cartTax: 14.02,
+    cartTotal: 172,
     dateSubmitted: new Date(),
     shippingStreetAddress: '3847 Prince Street',
     shippingCity: 'New York',
@@ -130,8 +130,8 @@ async function seed() {
   // cartItems
   await CartItem.create({
     cartItemQuantity: 2,
-    cartItemPrice: 56.08,
-    productId: 12,
+    cartItemPrice: 78.99,
+    productId: 1,
     cartId: 1
   })
 

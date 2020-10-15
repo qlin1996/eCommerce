@@ -27,12 +27,12 @@ class Cart extends React.Component {
   async componentDidMount() {
     await this.props.me()
     await this.props.fetchCartThunk(this.props.user.id)
-    await this.calculate()
+    this.calculate()
   }
 
   calculate = () => {
     const taxRate = 0.08875
-    const products = this.props.cart.products
+    const products = this.props.cart.products || []
     const cartSubTotal = products
       .map(product => product.price * product.cartItem.cartItemQuantity)
       .reduce((accum, currentVal) => accum + currentVal, 0)
@@ -40,24 +40,23 @@ class Cart extends React.Component {
     const cartTotal = cartSubTotal * (1 + taxRate) + this.state.cartShipping
 
     this.setState({
-      cartSubTotal,
-      cartTax,
-      cartTotal
+      cartSubTotal: cartSubTotal.toFixed(2),
+      cartTax: cartTax.toFixed(2),
+      cartTotal: cartTotal.toFixed(2)
     })
   }
 
   async handleDelete(event, productId) {
-    console.log('delete')
     event.preventDefault()
     await this.props.deleteCartItemThunk(
       this.props.user.id,
       this.props.cart.id,
       productId
     )
-    await this.calculate()
+    this.calculate()
   }
 
-  async minus(productId, cartItemQuantity) {
+  async minus(productId, cartItemQuantity, cartItemPrice) {
     if (cartItemQuantity === 0) {
       await this.props.deleteCartItemThunk(
         this.props.user.id,
@@ -69,17 +68,19 @@ class Cart extends React.Component {
       await this.props.updateCartItemThunk(this.props.user.id, {
         cartId: this.props.cart.id,
         productId,
-        cartItemQuantity
+        cartItemQuantity,
+        cartItemPrice
       })
       this.calculate()
     }
   }
 
-  async plus(productId, cartItemQuantity) {
+  async plus(productId, cartItemQuantity, cartItemPrice) {
     await this.props.updateCartItemThunk(this.props.user.id, {
       cartId: this.props.cart.id,
       productId,
-      cartItemQuantity
+      cartItemQuantity,
+      cartItemPrice
     })
     this.calculate()
   }
@@ -115,9 +116,7 @@ class Cart extends React.Component {
           <ul>
             <li className="total-row">
               <span className="label">subtotal</span>
-              <span className="value">
-                ${this.state.cartSubTotal.toFixed(2)}
-              </span>
+              <span className="value">${this.state.cartSubTotal}</span>
             </li>
             <li className="total-row">
               <span className="label">shipping</span>
@@ -127,11 +126,11 @@ class Cart extends React.Component {
             </li>
             <li className="total-row">
               <span className="label">tax</span>
-              <span className="value">${this.state.cartTax.toFixed(2)}</span>
+              <span className="value">${this.state.cartTax}</span>
             </li>
             <li className="total-row final">
               <span className="label">total</span>
-              <span className="value">${this.state.cartTotal.toFixed(2)}</span>
+              <span className="value">${this.state.cartTotal}</span>
             </li>
             <li className="total-row">
               <Link to="/checkout">

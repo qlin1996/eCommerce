@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {signup} from '../store/user'
+import {createCartThunk} from '../store/cart'
 import {Link} from 'react-router-dom'
 
 class Signup extends React.Component {
@@ -44,6 +45,8 @@ class Signup extends React.Component {
       )
       if (this.props.error) {
         this.setState({error: true})
+      } else {
+        await this.props.createCartThunk(this.state.userId)
       }
     }
   }
@@ -122,13 +125,15 @@ class Signup extends React.Component {
 
 const mapSignup = state => {
   return {
+    userId: state.user.id,
     error: state.user.error
   }
 }
 
 const mapDispatch = dispatch => ({
   signup: (email, password, firstName, lastName) =>
-    dispatch(signup(email, password, firstName, lastName))
+    dispatch(signup(email, password, firstName, lastName)),
+  createCartThunk: userId => dispatch(createCartThunk(userId))
 })
 
 export default connect(mapSignup, mapDispatch)(Signup)

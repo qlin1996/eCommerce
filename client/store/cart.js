@@ -82,6 +82,17 @@ export const updateCartThunk = (userId, cartInfo) => {
   }
 }
 
+export const createCartThunk = userId => {
+  return async dispatch => {
+    try {
+      const {data: cart} = await axios.post(`/api/users/${userId}/cart`)
+      dispatch(updateCart(cart))
+    } catch (error) {
+      console.log('ERROR CREATING CART>>>', error)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
