@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addProductThunk} from '../store/products'
+import {addProductThunk} from '../store/product'
 
 class AddProduct extends React.Component {
   constructor() {
@@ -24,7 +24,7 @@ class AddProduct extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
     await this.props.addProductThunk(this.state)
-    await this.props.history.push('/products')
+    await this.props.history.push(`/products/${this.props.product.id}`)
   }
 
   render() {
@@ -109,7 +109,9 @@ class AddProduct extends React.Component {
   }
 }
 
-const mapLogin = state => ({})
+const mapLogin = state => ({
+  product: state.product
+})
 
 const mapDispatch = dispatch => ({
   addProductThunk: newProductInfo => dispatch(addProductThunk(newProductInfo))
