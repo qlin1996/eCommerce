@@ -5,9 +5,6 @@ import {fetchCartThunk} from '../store/cart'
 import {me} from '../store/user'
 import CartItem from './cart-item'
 
-/**
- * COMPONENT
- */
 class Cart extends React.Component {
   async componentDidMount() {
     await this.props.me()
@@ -71,9 +68,6 @@ class Cart extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => ({
   user: state.user,
   cart: state.cart

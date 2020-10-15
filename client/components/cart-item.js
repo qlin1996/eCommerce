@@ -2,9 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {updateCartItemThunk, deleteCartItemThunk} from '../store/cart'
 
-/**
- * COMPONENT
- */
 class CartItem extends React.Component {
   capitalizeFirstLetter = str => {
     let arr = str.toLowerCase().split(' ')
@@ -85,9 +82,6 @@ class CartItem extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => ({
   user: state.user,
   cart: state.cart

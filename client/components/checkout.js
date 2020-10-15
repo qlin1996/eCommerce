@@ -5,9 +5,6 @@ import {Link} from 'react-router-dom'
 import {updateUserThunk} from '../store/user'
 import {updateCartThunk} from '../store/cart'
 
-/**
- * COMPONENT
- */
 class Checkout extends React.Component {
   constructor() {
     super()
@@ -246,9 +243,6 @@ class Checkout extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => ({
   user: state.user
 })

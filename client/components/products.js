@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import {fetchProductsThunk} from '../store/products'
 import {Link} from 'react-router-dom'
 
-/**
- * COMPONENT
- */
 class Products extends React.Component {
   constructor() {
     super()
@@ -208,9 +205,6 @@ class Products extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => ({
   products: state.products
 })

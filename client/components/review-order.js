@@ -121,9 +121,6 @@ class ReviewOrder extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => ({
   user: state.user,
   cart: state.cart

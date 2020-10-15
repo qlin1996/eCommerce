@@ -4,9 +4,6 @@ import {fetchProductThunk} from '../store/product'
 import {fetchCartThunk, addCartItemThunk} from '../store/cart'
 import {me} from '../store/user'
 
-/**
- * COMPONENT
- */
 class Product extends React.Component {
   async componentDidMount() {
     await this.props.me()
@@ -58,9 +55,6 @@ class Product extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => ({
   user: state.user,
   product: state.product,
