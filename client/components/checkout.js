@@ -1,7 +1,6 @@
 /* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {updateUserThunk} from '../store/user'
 import {updateCartThunk} from '../store/cart'
 
@@ -50,6 +49,7 @@ class Checkout extends React.Component {
         shippingState: this.state.shippingState,
         shippingZipCode: this.state.shippingZipCode
       })
+      this.props.history.push('/review-order')
     }
   }
 
@@ -229,13 +229,10 @@ class Checkout extends React.Component {
               <input name="ccv" type="number" onChange={this.handleChange} />
             </div>
           </div>
-
           <div>
-            <Link to="/review-order">
-              <button className="button" type="submit">
-                Review Order
-              </button>
-            </Link>
+            <button className="button" type="submit">
+              Review Order
+            </button>
           </div>
         </form>
       </div>

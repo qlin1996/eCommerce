@@ -19,12 +19,14 @@ class ReviewOrder extends React.Component {
   }
 
   handleSubmit = async () => {
-    await this.props.updateCartThunk(this.props.user.id)
+    await this.props.updateCartThunk(this.props.user.id, {
+      status: 'processing',
+      dateSubmitted: new Date()
+    })
   }
 
   render() {
     const products = this.props.cart.products || []
-    console.log(products)
     const subTotal = products
       .map(product => product.price * product.cartItem.cartItemQuantity)
       .reduce((accum, currentVal) => accum + currentVal, 0)
@@ -113,7 +115,11 @@ class ReviewOrder extends React.Component {
             </li>
             <li className="total-row">
               <Link to="/confirmation">
-                <button className="button" type="submit">
+                <button
+                  className="button"
+                  type="submit"
+                  onClick={this.handleSubmit}
+                >
                   Submit Order
                 </button>
               </Link>

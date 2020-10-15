@@ -45,7 +45,7 @@ class CartItem extends React.Component {
                     }
                   />
                 </div>
-                <p className="price"> x ${product.price}</p>
+                <p className="price"> x ${product.price.toFixed(2)}</p>
               </div>
             </div>
           </div>
