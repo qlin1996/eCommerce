@@ -1,6 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchProductThunk, updateProductThunk} from '../store/product'
+import {Link} from 'react-router-dom'
+import {
+  fetchProductThunk,
+  updateProductThunk,
+  deleteProductThunk
+} from '../store/product'
 
 class EditProduct extends React.Component {
   constructor() {
@@ -39,11 +44,26 @@ class EditProduct extends React.Component {
     await this.props.history.push(`/products/${this.props.product.id}`)
   }
 
+  handleDelete = async () => {
+    await this.props.deleteProductThunk(this.props.product.id)
+  }
+
   render() {
     return (
       <div className="wrap">
         <div className="heading">
           <h2>Edit Product</h2>
+          <div>
+            <Link to="/products">
+              <button
+                className="continue"
+                type="button"
+                onClick={this.handleDelete}
+              >
+                Delete Product
+              </button>
+            </Link>
+          </div>
         </div>
 
         <form
@@ -149,7 +169,8 @@ const mapLogin = state => ({
 const mapDispatch = dispatch => ({
   fetchProductThunk: productId => dispatch(fetchProductThunk(productId)),
   updateProductThunk: (productId, updatedData) =>
-    dispatch(updateProductThunk(productId, updatedData))
+    dispatch(updateProductThunk(productId, updatedData)),
+  deleteProductThunk: productId => dispatch(deleteProductThunk(productId))
 })
 
 export default connect(mapLogin, mapDispatch)(EditProduct)
