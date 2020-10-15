@@ -18,6 +18,11 @@ p {
   text-align: center;
 }
 
+img {
+  width: 100%;
+  height: auto;
+}
+
 header {
   position: sticky;
   top: 0;
@@ -67,6 +72,10 @@ select {
 
 .flex {
   display: flex;
+}
+
+.text-align-start {
+  text-align: start;
 }
 
 /* NAV BAR */
@@ -461,4 +470,19 @@ input {
   .checkout-row-3 div {
     width: 100%;
   }
+}
+
+/* CHECKOUT */
+.margin-right {
+  margin-right: 4em;
+}
+
+.margin-top {
+  margin-top: 0;
+}
+
+.bottom-border {
+  border-bottom: 1px solid #d0d0d0;
+  padding-bottom: 1em;
+  margin-bottom: 3em;
 }

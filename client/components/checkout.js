@@ -79,7 +79,7 @@ class Checkout extends React.Component {
           className="checkout-form"
         >
           <div className="checkout-row">
-            <h3>Shipping Detail</h3>
+            <h3>Shipping Details</h3>
           </div>
           <label htmlFor="shippingStreetAddress">
             <small>
@@ -137,7 +137,7 @@ class Checkout extends React.Component {
           </div>
 
           <div className="checkout-row">
-            <h3>Billing Detail</h3>
+            <h3>Billing Details</h3>
           </div>
           <label htmlFor="billingStreetAddress">
             <small>
