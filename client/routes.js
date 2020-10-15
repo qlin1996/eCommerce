@@ -11,7 +11,8 @@ import {
   Cart,
   Checkout,
   ReviewOrder,
-  Confirmation
+  Confirmation,
+  Home
 } from './components'
 import {me} from './store'
 
@@ -37,6 +38,7 @@ class Routes extends Component {
         <Route path="/checkout" component={Checkout} />
         <Route path="/review-order" component={ReviewOrder} />
         <Route path="/confirmation" component={Confirmation} />
+        <Route path="/home" component={Home} />
 
         {isLoggedIn && (
           <Switch>
