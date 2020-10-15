@@ -141,11 +141,11 @@ class Products extends React.Component {
               name="category"
               onChange={event => this.handleFilter(event)}
             >
-              <option value="All">All</option>
-              <option value="Necklace">Necklace</option>
-              <option value="Bracelet">Bracelet</option>
-              <option value="Ring">Ring</option>
-              <option value="Earring">Earring</option>
+              <option>All</option>
+              <option>Necklace</option>
+              <option>Bracelet</option>
+              <option>Ring</option>
+              <option>Earring</option>
             </select>
           </div>
 
@@ -160,7 +160,7 @@ class Products extends React.Component {
         </div>
         <div className="add-product">
           {this.props.user.isAdmin === 'yes' && (
-            <Link to="add-product">
+            <Link to="/add-product">
               <button type="button">Add Product</button>
             </Link>
           )}

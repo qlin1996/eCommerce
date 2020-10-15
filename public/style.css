@@ -254,6 +254,10 @@ select {
   margin: auto;
 }
 
+.edit-product {
+  margin-bottom: 1em;
+}
+
 /* LOGIN LOGOUT */
 .auth-grid {
   display: grid;

@@ -13,7 +13,8 @@ import {
   ReviewOrder,
   Confirmation,
   Home,
-  AddProduct
+  AddProduct,
+  EditProduct
 } from './components'
 import {me} from './store'
 
@@ -46,8 +47,15 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/user-home" component={UserHome} />
             <Route
+              exact
               path="/add-product"
               component={AddProduct}
+              history={history}
+            />
+            <Route
+              exact
+              path="/products/:productId/edit"
+              component={EditProduct}
               history={history}
             />
           </Switch>

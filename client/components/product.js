@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchProductThunk} from '../store/product'
 import {fetchCartThunk, addCartItemThunk} from '../store/cart'
 import {me} from '../store/user'
+import {Link} from 'react-router-dom'
 
 class Product extends React.Component {
   async componentDidMount() {
@@ -40,7 +41,7 @@ class Product extends React.Component {
           <h2>{product.name && this.capitalizeFirstLetter(product.name)}</h2>
           <p>{product.description}</p>
           <p>$ {product.price && product.price.toFixed(2)}</p>
-          <div>
+          <div className="edit-product">
             <button
               className="button"
               type="submit"
@@ -49,6 +50,15 @@ class Product extends React.Component {
               Add to Cart
             </button>
           </div>
+          {this.props.user.isAdmin === 'yes' && (
+            <div>
+              <Link to={`/products/${this.props.product.id}/edit`}>
+                <button className="button" type="button">
+                  Edit Product
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     )
