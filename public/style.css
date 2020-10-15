@@ -175,6 +175,10 @@ select {
   border-radius: 3px 0 0 3px;
 }
 
+.blurb {
+  margin: 1em 2em;
+}
+
 /* ALL PRODUCTS */
 .filter-sort {
   display: flex;

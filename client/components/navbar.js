@@ -69,6 +69,13 @@ const Navbar = ({handleClick, isLoggedIn}) => {
             <div className={navClicked ? 'flex-column' : null}>
               <NavLink
                 activeClassName="selected"
+                to="/home"
+                onClick={() => setNavClicked(false)}
+              >
+                Home
+              </NavLink>
+              <NavLink
+                activeClassName="selected"
                 to="/products"
                 onClick={() => setNavClicked(false)}
               >

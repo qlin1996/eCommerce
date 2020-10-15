@@ -17,13 +17,13 @@ export const Home = () => {
     <div>
       <div className="slideshow-container">
         <div className={slide !== 1 && 'slides'}>
-          <img src="https://auvere.com/content/revamp/sneak-peek/december2020/3.jpg" />
+          <img src="https://www.datocms-assets.com/25216/1602022197-hp-banner-classic2.jpg?q=40&auto=format&w=2880" />
         </div>
         <div className={slide !== 2 && 'slides'}>
-          <img src="https://auvere.com/content/revamp/sneak-peek/december2020/2.png" />
+          <img src="https://www.datocms-assets.com/25216/1600280698-d-homepage-unmatched-diamonds.jpg?q=40&auto=format&w=2880" />
         </div>
         <div className={slide !== 3 && 'slides'}>
-          <img src="https://auvere.com/content/revamp/sneak-peek/december2020/1.jpg" />
+          <img src="https://www.datocms-assets.com/25216/1602022240-hp-banner-classic-2-2.jpg?q=40&auto=format&w=2880" />
         </div>
         <a className="prev" onClick={minusSlides}>
           &#10094;
@@ -31,6 +31,14 @@ export const Home = () => {
         <a className="next" onClick={plusSlides}>
           &#10095;
         </a>
+      </div>
+      <div className="blurb">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
       </div>
     </div>
   )
