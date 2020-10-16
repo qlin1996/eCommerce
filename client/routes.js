@@ -28,8 +28,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, isAdmin} = this.props
-
+    const {isLoggedIn} = this.props
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -48,28 +47,21 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/user-home" component={UserHome} />
+            <Route
+              exact
+              path="/add-product"
+              component={AddProduct}
+              history={history}
+            />
+            <Route
+              exact
+              path="/products/:productId/edit"
+              component={EditProduct}
+              history={history}
+            />
+            <Route exact path="/carts" component={Carts} />
           </Switch>
         )}
-
-        {isLoggedIn &&
-          isAdmin === 'yes' && (
-            <Switch>
-              {/* Routes placed here are only available after admin logs in */}
-              <Route
-                exact
-                path="/add-product"
-                component={AddProduct}
-                history={history}
-              />
-              <Route
-                exact
-                path="/products/:productId/edit"
-                component={EditProduct}
-                history={history}
-              />
-              <Route exact path="/carts" component={Carts} />
-            </Switch>
-          )}
 
         {/* Displays our Home component as a fallback */}
         <Route component={Home} />
@@ -83,8 +75,7 @@ class Routes extends Component {
  */
 const mapState = state => {
   return {
-    isLoggedIn: state.user.id,
-    isAdmin: state.user.isAdmin
+    isLoggedIn: state.user.id
   }
 }
 
