@@ -5,12 +5,14 @@ import axios from 'axios'
  */
 const GET_CART = 'GET_CART'
 const UPDATE_CART = 'UPDATE_CART'
+const LOGOUT_CART = 'LOGOUT_CART'
 
 /**
  * ACTION CREATORS
  */
 const getCart = cart => ({type: GET_CART, cart})
 const updateCart = cart => ({type: UPDATE_CART, cart})
+const logoutCart = () => ({type: LOGOUT_CART})
 
 /**
  * THUNK CREATORS
@@ -93,6 +95,16 @@ export const createCartThunk = userId => {
   }
 }
 
+export const logoutCartThunk = () => {
+  return dispatch => {
+    try {
+      dispatch(logoutCart())
+    } catch (error) {
+      console.log('ERROR LOGGING OUT CART>>>', error)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -102,6 +114,8 @@ export default function(state = {}, action) {
       return action.cart
     case UPDATE_CART:
       return action.cart
+    case LOGOUT_CART:
+      return {}
     default:
       return state
   }
