@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
+import {connect} from 'react-redux'
 
-export const Home = () => {
+export const Home = props => {
+  const {firstName, lastName} = props.user
   const [slide, setSlide] = useState(1)
 
   const minusSlides = () => {
@@ -15,6 +17,11 @@ export const Home = () => {
 
   return (
     <div>
+      {firstName && (
+        <h3 className="text-align-center">
+          Welcome back {firstName} {lastName}!
+        </h3>
+      )}
       <div className="slideshow-container">
         <div className={slide !== 1 ? 'slides' : ''}>
           <img src="https://www.datocms-assets.com/25216/1602022197-hp-banner-classic2.jpg?q=40&auto=format&w=2880" />
@@ -44,4 +51,10 @@ export const Home = () => {
   )
 }
 
-export default Home
+const mapState = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapState)(Home)

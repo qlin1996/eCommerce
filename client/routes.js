@@ -28,7 +28,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isAdmin} = this.props
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -43,10 +43,9 @@ class Routes extends Component {
         <Route path="/confirmation" component={Confirmation} />
         <Route path="/home" component={Home} />
 
-        {isLoggedIn && (
+        {isAdmin && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/user-home" component={UserHome} />
             <Route
               exact
               path="/add-product"
@@ -75,7 +74,7 @@ class Routes extends Component {
  */
 const mapState = state => {
   return {
-    isLoggedIn: state.user.id
+    isAdmin: state.user.isAdmin
   }
 }
 

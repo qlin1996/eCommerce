@@ -52,7 +52,7 @@ export const signup = (
 
   try {
     dispatch(getUser(res.data))
-    history.push('/user-home')
+    history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
@@ -71,7 +71,7 @@ export const login = (email, password) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
-    history.push('/user-home')
+    history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
