@@ -97,13 +97,11 @@ class Login extends React.Component {
   }
 }
 
-const mapLogin = state => {
-  return {
-    error: state.user.error,
-    userId: state.user.id,
-    cart: state.cart
-  }
-}
+const mapLogin = state => ({
+  error: state.user.error,
+  userId: state.user.id,
+  cart: state.cart
+})
 
 const mapDispatch = dispatch => ({
   login: (email, password) => dispatch(login(email, password)),

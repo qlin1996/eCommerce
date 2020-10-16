@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import PropTypes from 'prop-types'
 import {
   Login,
   Signup,
@@ -15,7 +14,8 @@ import {
   Home,
   AddProduct,
   EditProduct,
-  SearchProducts
+  SearchProducts,
+  Carts
 } from './components'
 import {me} from './store'
 
@@ -36,7 +36,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={Products} />
-        <Route exact path="/products/search" component={SearchProducts} />
+        <Route path="/search-products" component={SearchProducts} />
         <Route exact path="/products/:productId" component={Product} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} history={history} />
@@ -67,8 +67,10 @@ class Routes extends Component {
                 component={EditProduct}
                 history={history}
               />
+              <Route exact path="/carts" component={Carts} />
             </Switch>
           )}
+
         {/* Displays our Home component as a fallback */}
         <Route component={Home} />
       </Switch>
@@ -97,11 +99,3 @@ const mapDispatch = dispatch => {
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes))
-
-/**
- * PROP TYPES
- */
-Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
