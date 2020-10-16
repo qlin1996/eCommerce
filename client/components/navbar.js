@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
-import {logoutCartThunk} from '../store/cart'
+import {logoutCart} from '../store/cart'
 import {NavLink} from 'react-router-dom'
 
 const Navbar = ({handleClick, isLoggedIn}) => {
@@ -174,7 +174,7 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-      dispatch(logoutCartThunk())
+      dispatch(logoutCart())
     }
   }
 }

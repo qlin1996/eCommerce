@@ -1,7 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-class Carts extends React.Component {}
+class Carts extends React.Component {
+  render() {
+    return <div>ALL CARTS</div>
+  }
+}
 
 const mapLogin = state => ({})
 

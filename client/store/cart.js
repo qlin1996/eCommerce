@@ -95,16 +95,6 @@ export const createCartThunk = userId => {
   }
 }
 
-export const logoutCartThunk = () => {
-  return dispatch => {
-    try {
-      dispatch(logoutCart())
-    } catch (error) {
-      console.log('ERROR LOGGING OUT CART>>>', error)
-    }
-  }
-}
-
 /**
  * REDUCER
  */
