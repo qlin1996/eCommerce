@@ -44,8 +44,11 @@ class SearchProducts extends React.Component {
       <div>
         <div className="search">
           <form onSubmit={this.submitSearch}>
-            <p>Search Products Here</p>
-            <input name="searchString" onChange={this.handleChange} />
+            <input
+              name="searchString"
+              placeholder="Search Products Here"
+              onChange={this.handleChange}
+            />
           </form>
         </div>
         {!this.state.productsSelected.length && <p>No match found!</p>}

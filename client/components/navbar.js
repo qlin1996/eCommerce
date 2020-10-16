@@ -40,7 +40,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
               {navClicked ? (
                 <NavLink
                   activeClassName="selected"
-                  to="/search-products"
+                  to="/products/search"
                   onClick={() => setNavClicked(false)}
                 >
                   Search
@@ -48,7 +48,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
               ) : (
                 <NavLink
                   activeClassName="selected"
-                  to="/search-products"
+                  to="/products/search"
                   onClick={() => setNavClicked(false)}
                 >
                   <i className="fas fa-search" />{' '}
@@ -107,7 +107,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
               <React.Fragment>
                 <NavLink
                   activeClassName="selected"
-                  to="/search-products"
+                  to="/products/search"
                   onClick={() => setNavClicked(false)}
                 >
                   Search
@@ -131,7 +131,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
               <div>
                 <NavLink
                   activeClassName="selected"
-                  to="/search-products"
+                  to="/products/search"
                   onClick={() => setNavClicked(false)}
                 >
                   <i className="fas fa-search" />

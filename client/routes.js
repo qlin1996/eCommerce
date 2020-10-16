@@ -28,7 +28,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, isAdmin} = this.props
 
     return (
       <Switch>
@@ -36,7 +36,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={Products} />
-        <Route path="/search-products" component={SearchProducts} />
+        <Route exact path="/products/search" component={SearchProducts} />
         <Route exact path="/products/:productId" component={Product} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} history={history} />
@@ -48,20 +48,27 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/user-home" component={UserHome} />
-            <Route
-              exact
-              path="/add-product"
-              component={AddProduct}
-              history={history}
-            />
-            <Route
-              exact
-              path="/products/:productId/edit"
-              component={EditProduct}
-              history={history}
-            />
           </Switch>
         )}
+
+        {isLoggedIn &&
+          isAdmin === 'yes' && (
+            <Switch>
+              {/* Routes placed here are only available after admin logs in */}
+              <Route
+                exact
+                path="/add-product"
+                component={AddProduct}
+                history={history}
+              />
+              <Route
+                exact
+                path="/products/:productId/edit"
+                component={EditProduct}
+                history={history}
+              />
+            </Switch>
+          )}
         {/* Displays our Home component as a fallback */}
         <Route component={Home} />
       </Switch>
@@ -74,9 +81,8 @@ class Routes extends Component {
  */
 const mapState = state => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: state.user.id,
+    isAdmin: state.user.isAdmin
   }
 }
 
