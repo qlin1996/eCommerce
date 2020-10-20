@@ -12,7 +12,7 @@ const LOGOUT_CART = 'LOGOUT_CART'
  */
 const getCart = cart => ({type: GET_CART, cart})
 const updateCart = cart => ({type: UPDATE_CART, cart})
-const logoutCart = () => ({type: LOGOUT_CART})
+export const logoutCart = () => ({type: LOGOUT_CART})
 
 /**
  * THUNK CREATORS

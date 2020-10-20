@@ -226,7 +226,17 @@ class Checkout extends React.Component {
                   {!this.state.ccv && <span> is required</span>}
                 </small>
               </label>
-              <input name="ccv" type="number" onChange={this.handleChange} />
+              <input
+                name="ccv"
+                type="number"
+                min="1"
+                max="999"
+                onInput={event => {
+                  if (event.target.value.length > 3)
+                    event.target.value = event.target.value.slice(0, 3)
+                }}
+                onChange={this.handleChange}
+              />
             </div>
           </div>
           <div>
