@@ -4,7 +4,6 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import {
   Login,
   Signup,
-  UserHome,
   Products,
   Product,
   Cart,
@@ -15,7 +14,6 @@ import {
   AddProduct,
   EditProduct,
   SearchProducts,
-  Carts
 } from './components'
 import {me} from './store'
 
@@ -58,7 +56,6 @@ class Routes extends Component {
               component={EditProduct}
               history={history}
             />
-            <Route exact path="/carts" component={Carts} />
           </Switch>
         )}
 
