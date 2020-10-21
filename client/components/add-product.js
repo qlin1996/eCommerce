@@ -61,7 +61,13 @@ class AddProduct extends React.Component {
               {!this.state.price && <span> is required</span>}
             </small>
           </label>
-          <input name="price" type="number" onChange={this.handleChange} />
+          <input
+            name="price"
+            type="number"
+            step="0.01"
+            min="0"
+            onChange={this.handleChange}
+          />
 
           <label htmlFor="imageUrl">
             <small>
@@ -79,7 +85,8 @@ class AddProduct extends React.Component {
           </label>
           <input
             name="quantityInStock"
-            type="text"
+            type="number"
+            min="0"
             onChange={this.handleChange}
           />
 

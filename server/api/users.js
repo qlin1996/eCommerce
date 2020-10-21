@@ -48,7 +48,7 @@ router.patch('/:userId/', isSelfOrAdmin, async (req, res, next) => {
 })
 
 // GET api/users/:userId/cart
-router.get('/:userId/cart', async (req, res, next) => {
+router.get('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
   try {
     let cart = await Cart.findOrCreate({
       where: {userId: req.params.userId, status: 'created'},
@@ -75,7 +75,7 @@ router.post('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
 })
 
 // PATCH api/users/:userId/cart
-router.patch('/:userId/cart', async (req, res, next) => {
+router.patch('/:userId/cart', isSelfOrAdmin, async (req, res, next) => {
   try {
     const updatedCartInfo = await Cart.update(req.body, {
       where: {userId: req.params.userId},
@@ -126,7 +126,7 @@ router.delete('/:userId/cartItem', isSelfOrAdmin, async (req, res, next) => {
 })
 
 // PATCH api/users/:userId/cartItem
-router.patch('/:userId/cartItem', async (req, res, next) => {
+router.patch('/:userId/cartItem', isSelfOrAdmin, async (req, res, next) => {
   try {
     await CartItem.update(req.body, {
       where: {
