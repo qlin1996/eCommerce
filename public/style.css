@@ -84,6 +84,15 @@ select {
 }
 
 /* NAV BAR */
+.count {
+  display: flex;
+  justify-content: center;
+  background-color: goldenrod;
+  border-radius: 100px;
+  width: 25px;
+  height: 25px;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
