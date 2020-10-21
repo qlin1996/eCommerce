@@ -1,13 +1,18 @@
 /* eslint-disable complexity */
 import React, {useState} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
 import {logoutCart} from '../store/cart'
 import {NavLink} from 'react-router-dom'
+import Modal from './modal'
 
 const Navbar = ({handleClick, isLoggedIn}) => {
   const [navClicked, setNavClicked] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleClose = () => {
+    setIsOpen(false)
+  }
 
   return (
     <header>
@@ -15,11 +20,12 @@ const Navbar = ({handleClick, isLoggedIn}) => {
         <i className="fas fa-bars" onClick={() => setNavClicked(true)} />
         <h1>Star Jewelry</h1>
       </div>
+      <Modal open={isOpen} handleClose={handleClose} />
       <nav className={navClicked ? 'nav-clicked' : null}>
         <i className="fas fa-times" onClick={() => setNavClicked(false)} />
         {isLoggedIn ? (
           <React.Fragment>
-            {/* After you login */}
+            {/* When you are logged in */}
             <div className={navClicked ? 'flex-column' : null}>
               <NavLink
                 activeClassName="selected"
@@ -70,7 +76,10 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 <NavLink
                   activeClassName="selected"
                   to="/cart"
-                  onClick={() => setNavClicked(false)}
+                  onClick={() => {
+                    setNavClicked(false)
+                    setIsOpen(true)
+                  }}
                 >
                   Cart
                 </NavLink>
@@ -87,7 +96,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            {/* Before you login */}
+            {/* When you are not logged in*/}
             <div className={navClicked ? 'flex-column' : null}>
               <NavLink
                 activeClassName="selected"
@@ -120,13 +129,6 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 >
                   Login
                 </NavLink>
-                <NavLink
-                  activeClassName="selected"
-                  to="/cart"
-                  onClick={() => setNavClicked(false)}
-                >
-                  Cart
-                </NavLink>
               </React.Fragment>
             ) : (
               <div>
@@ -144,11 +146,12 @@ const Navbar = ({handleClick, isLoggedIn}) => {
                 >
                   <i className="fas fa-user-alt" />
                 </NavLink>
-
                 <NavLink
                   activeClassName="selected"
-                  to="/cart"
-                  onClick={() => setNavClicked(false)}
+                  onClick={() => {
+                    setNavClicked(false)
+                    setIsOpen(true)
+                  }}
                 >
                   <i className="fas fa-shopping-cart" />
                 </NavLink>
@@ -166,7 +169,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: state.user.id
   }
 }
 
@@ -180,11 +183,3 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(Navbar)
-
-/**
- * PROP TYPES
- */
-Navbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
