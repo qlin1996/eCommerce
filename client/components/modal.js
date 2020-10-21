@@ -12,11 +12,15 @@ const Modal = ({open, handleClose}) => {
           <i className="far fa-times-circle" onClick={handleClose} />
         </div>
         <div>
-          <Link to="/login" className="continue modal-button">
-            Login
+          <Link to="/login" className="modal-button">
+            <button className="continue" type="button" onClick={handleClose}>
+              Login
+            </button>
           </Link>
-          <Link to="/signup" className="continue modal-button">
-            Signup
+          <Link to="/signup" className="modal-button">
+            <button className="continue" type="button" onClick={handleClose}>
+              Signup
+            </button>
           </Link>
         </div>
       </div>
