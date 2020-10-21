@@ -4,8 +4,17 @@ import {fetchProductThunk} from '../store/product'
 import {fetchCartThunk, addCartItemThunk} from '../store/cart'
 import {me} from '../store/user'
 import {Link} from 'react-router-dom'
+import Modal from './modal'
 
 class Product extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      isOpen: false
+    }
+    this.handleClose = this.handleClose.bind(this)
+  }
+
   async componentDidMount() {
     await this.props.me()
     await this.props.fetchCartThunk(this.props.user.id)
@@ -21,19 +30,28 @@ class Product extends React.Component {
   }
 
   handleSubmit = event => {
-    event.preventDefault()
-    this.props.addCartItemThunk(
-      this.props.user.id,
-      this.props.cart.id,
-      this.props.product.id,
-      this.props.product.price
-    )
+    if (this.props.user.id) {
+      event.preventDefault()
+      this.props.addCartItemThunk(
+        this.props.user.id,
+        this.props.cart.id,
+        this.props.product.id,
+        this.props.product.price
+      )
+    } else {
+      this.setState({isOpen: true})
+    }
+  }
+
+  handleClose() {
+    this.setState({isOpen: false})
   }
 
   render() {
     const product = this.props.product || {}
     return (
       <div className="single-product-grid">
+        <Modal open={this.state.isOpen} handleClose={this.handleClose} />
         <div className="single-product-card">
           <img src={product.imageUrl} className="single-product-img " />
         </div>
