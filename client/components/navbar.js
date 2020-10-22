@@ -173,15 +173,15 @@ const Navbar = ({
                 >
                   <i className="fas fa-user-alt" />
                 </NavLink>
-                <NavLink
-                  activeClassName="selected"
+                <a
+                  href="#"
                   onClick={() => {
                     setNavClicked(false)
                     setIsOpen(true)
                   }}
                 >
                   <i className="fas fa-shopping-cart" />
-                </NavLink>
+                </a>
               </div>
             )}
           </React.Fragment>
