@@ -7,8 +7,6 @@ import {
   Products,
   Product,
   Cart,
-  Checkout,
-  ReviewOrder,
   Confirmation,
   Home,
   AddProduct,
@@ -36,8 +34,6 @@ class Routes extends Component {
         <Route path="/search-products" component={SearchProducts} />
         <Route exact path="/products/:productId" component={Product} />
         <Route path="/cart" component={Cart} />
-        <Route path="/checkout" component={Checkout} history={history} />
-        <Route path="/review-order" component={ReviewOrder} />
         <Route path="/confirmation" component={Confirmation} />
         <Route path="/home" component={Home} />
 

@@ -23,6 +23,7 @@ class Cart extends React.Component {
     this.handleDelete = this.handleDelete.bind(this)
     this.minus = this.minus.bind(this)
     this.plus = this.plus.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   async componentDidMount() {
@@ -86,7 +87,7 @@ class Cart extends React.Component {
     this.calculate()
   }
 
-  handleSubmit = async () => {
+  async handleSubmit() {
     await this.props.updateCartThunk(this.props.user.id, this.state)
   }
 
@@ -134,16 +135,11 @@ class Cart extends React.Component {
               <span className="value">${this.state.cartTotal}</span>
             </li>
             <li className="total-row">
-              <Link to="/checkout">
-                <button
-                  className="button"
-                  type="submit"
-                  onClick={this.handleSubmit}
-                >
-                  Checkout
-                </button>
-              </Link>
-              <Stripe className="button" />
+              <Stripe
+                className="button"
+                handleSubmit={this.handleSubmit}
+                cartTotal={this.state.cartTotal}
+              />
             </li>
           </ul>
         </div>

@@ -5,19 +5,19 @@ module.exports = router
 
 router.post('/', async (req, res, next) => {
   try {
-    const {product, token} = req.body
+    const {token, cartTotal} = req.body
     const customer = await stripe.customers.create({
       email: token.email,
       source: token.id
     })
-    const idempotency_key = v4()
+    const idempotencyKey = v4()
     await stripe.charges.create(
       {
-        amount: product.price * 100,
+        amount: cartTotal * 100,
         currency: 'usd',
         customer: customer.id,
         receipt_email: token.email,
-        description: `Purchased the ${product.name}`,
+        description: `Purchased the x`,
         shipping: {
           name: token.card.name,
           address: {
@@ -30,11 +30,11 @@ router.post('/', async (req, res, next) => {
         }
       },
       {
-        idempotency_key
+        idempotencyKey
       }
     )
-    res.send('success')
+    res.sendStatus(204)
   } catch (error) {
-    res.send('failure')
+    res.send(error)
   }
 })

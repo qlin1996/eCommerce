@@ -22,11 +22,7 @@ async function seed() {
     lastName: 'User',
     email: 'user@gmail.com',
     password: 'user',
-    isAdmin: 'no',
-    billingStreetAddress: '3847 Prince Street',
-    billingCity: 'New York',
-    billingState: 'New York',
-    billingZipCode: 11327
+    isAdmin: 'no'
   })
 
   // products
