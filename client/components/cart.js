@@ -9,6 +9,7 @@ import {
 } from '../store/cart'
 import {me} from '../store/user'
 import CartItem from './cart-item'
+import Stripe from './stripe'
 
 class Cart extends React.Component {
   constructor() {
@@ -142,6 +143,7 @@ class Cart extends React.Component {
                   Checkout
                 </button>
               </Link>
+              <Stripe className="button" />
             </li>
           </ul>
         </div>
