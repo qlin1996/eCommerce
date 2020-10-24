@@ -36,6 +36,7 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/confirmation" component={Confirmation} />
         <Route path="/home" component={Home} />
+        <Route path="/" component={Home} />
 
         {isAdmin && (
           <Switch>
