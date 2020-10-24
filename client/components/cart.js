@@ -136,7 +136,6 @@ class Cart extends React.Component {
             </li>
             <li className="total-row">
               <Stripe
-                className="button"
                 handleSubmit={this.handleSubmit}
                 cartTotal={this.state.cartTotal}
               />
