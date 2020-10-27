@@ -2,9 +2,9 @@
 
 http://star-jewelry.herokuapp.com/
 
-Star Jewelry is a responsive and mobile friendly ecommerce site that that
+Star Jewelry is a responsive and mobile friendly ecommerce site that
 
-1.  allows users to view products, add to cart and checkout and
+1.  allows users to view products, add to cart and checkout
 2.  allows admins to add and edit products
 
 ## Features
