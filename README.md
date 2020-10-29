@@ -13,8 +13,7 @@ Star Jewelry is a responsive and mobile friendly ecommerce site that
 * All products view pagination
 * All products search bar
 * Filter and sort products drop down
-* Login/Logout with Sessions
-* Google OAuth
+* Login/Logout with sessions and Google OAuth
 
 ## Stack
 
