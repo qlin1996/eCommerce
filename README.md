@@ -22,3 +22,4 @@ Star Jewelry is a responsive and mobile friendly ecommerce site that
 * Redux
 * Express
 * Sequelize
+* PostgreSQL
