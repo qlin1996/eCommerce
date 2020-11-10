@@ -24,13 +24,13 @@ export const Home = props => {
       )}
       <div className="slideshow-container">
         <div className={slide !== 1 ? 'slides' : ''}>
-          <img src="https://www.datocms-assets.com/25216/1602022197-hp-banner-classic2.jpg?q=40&auto=format&w=2880" />
+          <img src="//cdn.shopify.com/s/files/1/0470/6941/files/1600px_by_900px_home_slide_8_1600x.jpg?v=1600216174" />
         </div>
         <div className={slide !== 2 ? 'slides' : ''}>
-          <img src="https://www.datocms-assets.com/25216/1600280698-d-homepage-unmatched-diamonds.jpg?q=40&auto=format&w=2880" />
+          <img src="//cdn.shopify.com/s/files/1/0470/6941/files/1600px_by_900px_home_slide_1_0275c838-4ad7-4f64-8d2b-742ebcff1ae4_1600x.jpg?v=1600215467" />
         </div>
         <div className={slide !== 3 ? 'slides' : ''}>
-          <img src="https://www.datocms-assets.com/25216/1602022240-hp-banner-classic-2-2.jpg?q=40&auto=format&w=2880" />
+          <img src="//cdn.shopify.com/s/files/1/0470/6941/files/1600px_by_900px_home_slide_4_1600x.jpg?v=1600215352" />
         </div>
         <a className="prev" onClick={minusSlides}>
           &#10094;
