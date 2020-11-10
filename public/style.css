@@ -66,6 +66,11 @@ select {
   transition: 0.1s all;
 }
 
+.button:hover {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px darkgoldenrod;
+}
+
 .button:active {
   transform: scale(0.98);
   box-shadow: 3px 2px 22px 1px darkgoldenrod;
@@ -368,6 +373,11 @@ input {
   font-weight: bold;
   outline: none;
   font-size: 0.6em;
+}
+
+.continue:hover {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px darkgoldenrod;
 }
 
 .total-row {
